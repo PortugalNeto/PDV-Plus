@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Cadastro PDV";
+}
+
+<h2>Cadastro de PDV</h2>
+
+<form action="/pdv/cadastro" method="post">
+    <div class="form-group">
+        <label for="nome">Estação</label>
+        <input type="text" name="estacao" class="form-control" id="Codigo" placeholder="Estação" required>
+    </div>
+    <div class="form-group">
+        <label for="PDV">PDV</label>
+        <input type="text" name="pdv" class="form-control" id="pdv" placeholder="Número do PDV" required>
+    </div>
+    <div class="form-group">
+        <label for="data">Código</label>
+        <input type="text" name="codigo" class="form-control" id="data" placeholder="Código" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+

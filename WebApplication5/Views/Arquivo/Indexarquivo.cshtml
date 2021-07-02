@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<h4>Filtrar por data</h4>
+<form action="/arquivo/indexarquivo" method="get">
+    <div class="form-inline">
+        <label for="exampleInputEmail1">Data Inicial</label>
+        <input type="date" name="inicial" class="form-control" id="data inicio" aria-describedby="emailHelp" placeholder="data inicial">
+        <label for="exampleInputPassword1">Data Final</label>
+        <input type="date" name="final" class="form-control" id="data fim" placeholder="data final">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </div>
+</form>
+<hr />
+<h2 class="text-center">Arquivos Comunicados</h2>
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Data</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Nome1</td>
+                <td>Data Qualquer</td>
+            </tr>
+    </tbody>
+</table>
