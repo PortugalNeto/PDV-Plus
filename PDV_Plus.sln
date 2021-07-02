@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaCadastroLeitura", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "ClassLibrary1\DataBase.csproj", "{742C4D05-9DC6-4675-A269-6261255FC8ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Domain\Entities.csproj", "{48B53C72-0C7F-41C7-8B33-1330FECA1EFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{742C4D05-9DC6-4675-A269-6261255FC8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{742C4D05-9DC6-4675-A269-6261255FC8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{742C4D05-9DC6-4675-A269-6261255FC8ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B53C72-0C7F-41C7-8B33-1330FECA1EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B53C72-0C7F-41C7-8B33-1330FECA1EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B53C72-0C7F-41C7-8B33-1330FECA1EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B53C72-0C7F-41C7-8B33-1330FECA1EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

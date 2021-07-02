@@ -170,9 +170,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Arquivo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\PDV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -240,6 +238,10 @@
     <ProjectReference Include="..\ClassLibrary1\DataBase.csproj">
       <Project>{742c4d05-9dc6-4675-a269-6261255fc8ed}</Project>
       <Name>DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Entities.csproj">
+      <Project>{48b53c72-0c7f-41c7-8b33-1330feca1efe}</Project>
+      <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

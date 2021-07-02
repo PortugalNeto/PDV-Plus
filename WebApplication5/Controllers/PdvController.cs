@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Database;
 using System.Data;
+using Entities;
 
 namespace WebApplication5.Controllers
 {

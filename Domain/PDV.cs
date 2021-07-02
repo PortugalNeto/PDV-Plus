@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebApplication5.Models
+
+namespace Entities
 {
     public class PDV
     {
@@ -92,7 +94,7 @@ namespace WebApplication5.Models
             
         }
 
-        internal void Delete(int id)
+        public void Delete(int id)
         {
             BdPdv bdpdv = new BdPdv();
             bdpdv.OpenConnection();
@@ -100,3 +102,4 @@ namespace WebApplication5.Models
         }
     }
 }
+
