@@ -30,7 +30,7 @@ namespace WebApplication5.Controllers
             pdv.PDV_nome = Pdv;
             pdv.Codigo = Codigo;
 
-            pdv.Save();
+            pdv.SavePDV();
             return Redirect("/pdv/lista");
         }
 

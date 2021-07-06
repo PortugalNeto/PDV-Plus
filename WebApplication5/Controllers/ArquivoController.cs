@@ -6,50 +6,24 @@ using System.Web.Mvc;
 using Database;
 using System.Data;
 using Microsoft.AspNet.Identity.EntityFramework;
-using WebApplication5.Models;
+using Entities;
 
 namespace WebApplication5.Controllers
 {
     public class ArquivoController : Controller
     {
-        //
-        // GET: /Arquivo/
+        
+        [HttpGet]
         public ActionResult IndexArquivo()
         {
-            //Arquivo arquivo = new Arquivo();
-            //arquivo.GetArquivo();
+            List<Arquivo> lstarq = new List<Arquivo>();
+            Arquivo arq = new Arquivo();
+            arq.SaveFromDirectory();
+            lstarq = arq.GetAll();
+
+            ViewBag.ListaArquivo = lstarq;
             return View();
         }
 
-        //
-        // GET: /Arquivo/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Arquivo/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Arquivo/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

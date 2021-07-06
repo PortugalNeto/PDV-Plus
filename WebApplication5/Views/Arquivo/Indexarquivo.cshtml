@@ -1,6 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Arquivos";
+    List<Entities.Arquivo> lstarq = ViewBag.ListaArquivo;
 }
 <h4>Filtrar por data</h4>
 <form action="/arquivo/indexarquivo" method="get">
@@ -18,6 +19,7 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
+
             <th scope="col">Id</th>
             <th scope="col">Nome</th>
             <th scope="col">Data</th>
@@ -25,9 +27,13 @@
     </thead>
     <tbody>
             <tr>
-                <th scope="row">1</th>
-                <td>Nome1</td>
-                <td>Data Qualquer</td>
+                @foreach (var arq in lstarq)
+                {
+                <th scope="row">@arq.Id</th>
+                <td>@arq.Nome</td>
+                <td>@arq.Data</td>
+                }
             </tr>
     </tbody>
 </table>
+                    

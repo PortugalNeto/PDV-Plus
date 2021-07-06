@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public class BdPdv
+    public class BancoDeDados
     {
         private bool connectState = false;
         private MySqlConnection mConn;
 
         String sConnectionMysqlString;
 
-        public BdPdv()
+        public BancoDeDados()
         {
             string bdServer = "localhost";
             string bdServerDatabase = "sistema_pdv";
@@ -118,6 +118,7 @@ namespace Database
                     return null;
                 }
 
+                
                 String sql = "select * from dt_pdv "
                                 + "where Estacao = @estacao";
 
@@ -273,7 +274,8 @@ namespace Database
             return true;
         }
 
-        public bool SetArquivos(string nome, DateTime data)
+
+        public bool SaveArquivo(string Nome, DateTime Data)
         {
             try
             {
@@ -290,12 +292,12 @@ namespace Database
                     return false;
                 }
 
-                String sql = "insert into arquivos (Nome, Data)" +
+                String sql = "insert into arquivos (Nome, Data) " +
                              "values (@nome, @data)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
-                cmd.Parameters.AddWithValue("@nome", nome);
-                cmd.Parameters.AddWithValue("@data", data);
+                cmd.Parameters.AddWithValue("@nome", Nome);
+                cmd.Parameters.AddWithValue("@data", Data);
 
                 try
                 {
@@ -314,5 +316,43 @@ namespace Database
             }
             return true;
         }
+
+        public DataTable GetAllArquivo()
+        {
+            try
+            {
+                try
+                {
+                    if (mConn.State != ConnectionState.Open)
+                    {
+                        mConn.Open();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //ToolsBLL.gerarLog(e, "Problema de Conexão ao banco. ConnectionBD.cs");
+                    return null;
+                }
+
+                String sql = "select * from arquivos";
+                DataTable dtArq = new DataTable();
+                MySqlDataAdapter daArq = new MySqlDataAdapter();
+
+                daArq = new MySqlDataAdapter(sql, mConn);
+
+                daArq.Fill(dtArq);
+
+                CloseConnection();
+
+                return dtArq;
+
+            }
+            catch (Exception e)
+            {
+                //ToolsBLL.gerarLog(e, "Problema ao autenticar. ConnectionBD.cs");
+                return null;
+            }
+        }
+
     }
 }

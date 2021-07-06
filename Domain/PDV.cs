@@ -16,23 +16,23 @@ namespace Entities
         public string PDV_nome { get; set; }
         public string Estacao { get; set; }
 
-        public void Save()
+        public void SavePDV()
         {
-            BdPdv bdpdv = new BdPdv();
-            bdpdv.OpenConnection();
-            bdpdv.SetPDV(this.Estacao, this.PDV_nome, this.Codigo);
+            BancoDeDados BancoDeDados = new BancoDeDados();
+            BancoDeDados.OpenConnection();
+            BancoDeDados.SetPDV(this.Estacao, this.PDV_nome, this.Codigo);
         }
 
         public void Update(int id, string Estacao, string Pdv, string Codigo)
         {
-            BdPdv bdpdv = new BdPdv();
-            bdpdv.OpenConnection();
-            bdpdv.UpdatePDV(id, Estacao, Pdv, Codigo);
+            BancoDeDados BancoDeDados = new BancoDeDados();
+            BancoDeDados.OpenConnection();
+            BancoDeDados.UpdatePDV(id, Estacao, Pdv, Codigo);
         }
 
         public List<PDV> GetAll()
         {
-            BdPdv bd = new BdPdv();
+            BancoDeDados bd = new BancoDeDados();
             bd.OpenConnection();
             DataTable dtGetAll = bd.GetAllPDV();
 
@@ -53,7 +53,7 @@ namespace Entities
 
         public List<PDV> GetByEstacao(string estacao)
         {
-            BdPdv bd = new BdPdv();
+            BancoDeDados bd = new BancoDeDados();
             bd.OpenConnection();
             DataTable dtGetByEstacao = bd.GetPDVByEstacao(estacao);
 
@@ -96,9 +96,9 @@ namespace Entities
 
         public void Delete(int id)
         {
-            BdPdv bdpdv = new BdPdv();
-            bdpdv.OpenConnection();
-            bdpdv.DeletePDV(id);
+            BancoDeDados BancoDeDados = new BancoDeDados();
+            BancoDeDados.OpenConnection();
+            BancoDeDados.DeletePDV(id);
         }
     }
 }
