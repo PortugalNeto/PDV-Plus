@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Arquivos";
+    List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
+    List<string> lstEstacao = ViewBag.ListaEstacao;
+}
+<h4>Filtro Estacao</h4>
+<form action="/arquivo/Index" method="get">
+    <div class="form-inline">
+        <select name="estacao" class="form-control">
+            <option></option>
+            @foreach (string estacao in lstEstacao)
+            {
+                <option>@estacao</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </div>
+</form>
+<hr />
+<h2 class="text-center">Arquivos Comunicados</h2>
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Estação</th>
+            <th scope="col">Data</th>
+            <th scope="col">Codigo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var arquivo in lstArquivos)
+        {
+            <tr>
+                <td scope="row">@arquivo.Id</td>
+                <td scope="row">@arquivo.Nome</td>
+                <td scope="row">@arquivo.Estacao</td>
+                <td scope="row">@arquivo.Data</td>
+                <td scope="row">@arquivo.Codigo</td>
+            </tr>
+        }
+    </tbody>
+</table>

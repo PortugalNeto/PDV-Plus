@@ -28,8 +28,19 @@ namespace WebApplication5.Controllers
             pdv.Numero = Pdv;
             pdv.Codigo = Codigo;
 
-            pdv.Save();
-            return Redirect("/pdv/lista");
+            if (!pdv.ValidaPdv())
+            {
+                pdv.Save();
+                ViewBag.Response = "Código Cadastrado com Sucesso!";
+                return Redirect("/pdv/lista");
+            }
+            else
+            {
+                ViewBag.Response = "Código já Cadastrado!";
+            }
+
+            return View();
+            //return Redirect("/pdv/lista");
         }
 
         [HttpGet]

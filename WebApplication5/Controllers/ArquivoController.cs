@@ -12,17 +12,28 @@ namespace WebApplication5.Controllers
 {
     public class ArquivoController : Controller
     {
-        
+
         [HttpGet]
-        public ActionResult IndexArquivo()
+        public ActionResult Index(string estacao)
         {
             Arquivo arquivo = new Arquivo();
             arquivo.SaveFromDirectory();
-            List<Arquivo> lstArquivo = arquivo.GetLastComunication();
+            
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+
+            if (!string.IsNullOrEmpty(estacao))
+            {
+                lstArquivo = arquivo.GetLastComunicationByFilter(estacao);
+            }
+            else
+            {
+                lstArquivo = arquivo.GetLastComunication();
+            }
 
             ViewBag.ListaArquivo = lstArquivo;
+            ViewBag.ListaEstacao = new Pdv().GetAll().Select(x => x.Estacao).Distinct().ToList();
+
             return View();
         }
-
     }
 }

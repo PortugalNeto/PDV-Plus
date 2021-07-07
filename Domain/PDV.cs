@@ -40,7 +40,7 @@ namespace Entities
             {
                 Id = x.Field<int>("Id"),
                 Codigo = x.Field<string>("Codigo"),
-                Numero = x.Field<string>("NumeroSerie"),
+                Numero = x.Field<string>("Numero"),
                 Estacao = x.Field<string>("Estacao"),
             }).ToList();
             
@@ -61,7 +61,7 @@ namespace Entities
                 {
                     Id = x.Field<int>("Id"),
                     Codigo = x.Field<string>("Codigo"),
-                    Numero = x.Field<string>("PDV_nome"),
+                    Numero = x.Field<string>("Numero"),
                     Estacao = x.Field<string>("Estacao"),
                 }).ToList();
 
@@ -78,7 +78,7 @@ namespace Entities
                 {
                     Id = x.Field<int>("Id"),
                     Codigo = x.Field<string>("Codigo"),
-                    Numero = x.Field<string>("PDV_nome"),
+                    Numero = x.Field<string>("Numero"),
                     Estacao = x.Field<string>("Estacao"),
                 }).ToList();
 
@@ -91,6 +91,16 @@ namespace Entities
             PdvDataAccess BancoDeDados = new PdvDataAccess();
             BancoDeDados.OpenConnection();
             BancoDeDados.Delete(id);
+        }
+
+        public bool ValidaPdv()
+        {
+            PdvDataAccess BancoDeDados = new PdvDataAccess();
+            BancoDeDados.OpenConnection();
+
+            var teste = BancoDeDados.GetAll().AsEnumerable().Where(x => x.Field<string>("Codigo").Contains(this.Codigo)).Any();
+
+            return BancoDeDados.GetAll().AsEnumerable().Where(x => x.Field<string>("Codigo").Contains(this.Codigo)).Any();
         }
     }
 }

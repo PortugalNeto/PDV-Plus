@@ -222,7 +222,7 @@
     <Content Include="Views\Pdv\Lista.cshtml" />
     <Content Include="Views\Pdv\Edita.cshtml" />
     <Content Include="Views\Pdv\Excluir.cshtml" />
-    <Content Include="Views\Arquivo\Indexarquivo.cshtml" />
+    <Content Include="Views\Arquivo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

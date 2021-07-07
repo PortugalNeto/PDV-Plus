@@ -95,6 +95,29 @@ namespace Entities
             var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
                     .SelectMany(g => g.OrderByDescending(d => d.Data).Take(1)).ToList();
 
+            return filterLastComunication;
+        }
+
+        public List<Arquivo> GetLastComunicationByFilter(string estacao)
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetAll().AsEnumerable().
+                Where(x => x.Field<string>("Estacao") == estacao).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Estacao = x.Field<string>("Estacao"),
+                }).ToList();
+
+            var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
+                    .SelectMany(g => g.OrderByDescending(d => d.Data).Take(1)).ToList();
 
             return filterLastComunication;
         }

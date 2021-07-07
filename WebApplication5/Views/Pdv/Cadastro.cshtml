@@ -1,5 +1,11 @@
 ﻿@{
     ViewBag.Title = "Cadastro PDV";
+    string response = ViewBag.response;
+}
+
+@if (!string.IsNullOrEmpty(response))
+{
+    <h4>@response</h4>
 }
 
 <h2>Cadastro de PDV</h2>

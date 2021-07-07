@@ -1,9 +1,9 @@
 ﻿@{
     ViewBag.Title = "Lista";
     List<Entities.Pdv> lstPdv = ViewBag.ListaPdv;
-    
 }
 <br />
+
 <form action="/pdv/lista" method="get"> 
     <div class="form-group">
         <input type="text" name="estacao" class="form-control" id="estacao" placeholder="Pesquisar Estação" required>
@@ -25,7 +25,7 @@
         <tr>            
             <th scope="col">Id</th>
             <th scope="col">Estação</th>
-            <th scope="col">PDV</th>
+            <th scope="col">Número Pdv</th>
             <th scope="col">Código</th>
             <th scope="col">Ações</th>
         </tr>
@@ -36,7 +36,7 @@
             <tr>
                 <th scope="row">@pdv.Id</th>
                 <td>@pdv.Estacao</td>
-                <td>@pdv.Nome</td>
+                <td>@pdv.Numero</td>
                 <td>@pdv.Codigo</td>
                 
                 <td>

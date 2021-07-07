@@ -118,17 +118,12 @@ namespace Database
                     return null;
                 }
 
-                
-                String sql = "select * from dt_pdv "
-                                + "where Estacao = @estacao";
+
+                String sql = "select * from pdv where Estacao = @estacao";
 
                 DataTable dtPDV = new DataTable();
-                MySqlDataAdapter daPDV = new MySqlDataAdapter();
-                MySqlCommand cmd = new MySqlCommand(sql, mConn);
-                cmd.Parameters.AddWithValue("@estacao", estacao);
-
-                daPDV = new MySqlDataAdapter(sql, mConn);
-
+                MySqlDataAdapter daPDV = new MySqlDataAdapter(sql, mConn);
+                daPDV.SelectCommand.Parameters.AddWithValue("@estacao", estacao);
                 daPDV.Fill(dtPDV);
 
                 CloseConnection();
@@ -143,7 +138,7 @@ namespace Database
             }
         }
 
-        public bool Save(string Estacao, string Pdv, string Codigo)
+        public bool Save(string estacao, string numero, string codigo)
         {
             try
             {
@@ -160,13 +155,13 @@ namespace Database
                     return false;
                 }
 
-                String sql = "insert into dt_pdv (Estacao, PDV_nome, Codigo)" +
-                             "values (@estacao, @pdv, @codigo)";
+                String sql = "insert into pdv (Estacao, Numero, Codigo)" +
+                             "values (@estacao, @numero, @codigo)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
-                cmd.Parameters.AddWithValue("@estacao", Estacao);
-                cmd.Parameters.AddWithValue("@pdv", Pdv);
-                cmd.Parameters.AddWithValue("@codigo", Codigo);
+                cmd.Parameters.AddWithValue("@estacao", estacao);
+                cmd.Parameters.AddWithValue("@numero", numero);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
 
                 try
                 {
@@ -186,7 +181,7 @@ namespace Database
             return true;
         }
 
-        public bool Update(int Id, string Estacao, string Pdv, string Codigo)
+        public bool Update(int id, string estacao, string numero, string codigo)
         {
             try
             {
@@ -203,17 +198,17 @@ namespace Database
                     return false;
                 }
 
-                String sql = "UPDATE dt_pdv " +
-		                        "SET Estacao = @estacao, " +
-			                        "PDV_nome = @pdv, " +
-			                            "Codigo = @codigo " +
-				                            "where Id = @id";
+                String sql = "UPDATE pdv " +
+                                "SET Estacao = @estacao, " +
+                                    "Numero = @numero, " +
+                                        "Codigo = @codigo " +
+                                            "where Id = @id";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
-                cmd.Parameters.AddWithValue("@estacao", Estacao);
-                cmd.Parameters.AddWithValue("@pdv", Pdv);
-                cmd.Parameters.AddWithValue("@codigo", Codigo);
-                cmd.Parameters.AddWithValue("@id", Id);
+                cmd.Parameters.AddWithValue("@estacao", estacao);
+                cmd.Parameters.AddWithValue("@numero", numero);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+                cmd.Parameters.AddWithValue("@id", id);
 
                 try
                 {
@@ -250,7 +245,7 @@ namespace Database
                     return false;
                 }
 
-                String sql = "DELETE from dt_pdv " +
+                String sql = "DELETE from pdv " +
                                 "WHERE Id = @id";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
