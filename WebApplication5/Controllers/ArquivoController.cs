@@ -16,12 +16,11 @@ namespace WebApplication5.Controllers
         [HttpGet]
         public ActionResult IndexArquivo()
         {
-            List<Arquivo> lstarq = new List<Arquivo>();
-            Arquivo arq = new Arquivo();
-            arq.SaveFromDirectory();
-            lstarq = arq.GetAll();
+            Arquivo arquivo = new Arquivo();
+            arquivo.SaveFromDirectory();
+            List<Arquivo> lstArquivo = arquivo.GetLastComunication();
 
-            ViewBag.ListaArquivo = lstarq;
+            ViewBag.ListaArquivo = lstArquivo;
             return View();
         }
 

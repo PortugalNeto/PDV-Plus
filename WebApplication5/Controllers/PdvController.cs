@@ -23,24 +23,22 @@ namespace WebApplication5.Controllers
         [HttpPost]
         public ActionResult Cadastro(string Estacao, string Pdv, string Codigo)
         {
-
-
-            PDV pdv = new PDV();
+            Pdv pdv = new Pdv();
             pdv.Estacao = Estacao;
-            pdv.PDV_nome = Pdv;
+            pdv.Numero = Pdv;
             pdv.Codigo = Codigo;
 
-            pdv.SavePDV();
+            pdv.Save();
             return Redirect("/pdv/lista");
         }
 
         [HttpGet]
         public ActionResult Lista(string estacao)
         {
-            PDV pdv = new PDV();
+            Pdv pdv = new Pdv();
             pdv.Estacao = estacao;
 
-            List<PDV> lstPdv = new List<PDV>();
+            List<Pdv> lstPdv = new List<Pdv>();
             
             if (string.IsNullOrEmpty(estacao))
             {
@@ -59,8 +57,8 @@ namespace WebApplication5.Controllers
         [HttpGet]
         public ActionResult Edita(int id)
         {
-            PDV pdv = new PDV();
-            List<PDV> lstPdv = new List<PDV>();
+            Pdv pdv = new Pdv();
+            List<Pdv> lstPdv = new List<Pdv>();
             lstPdv = pdv.GetAll();
             foreach (var i in lstPdv)
             {
@@ -78,8 +76,8 @@ namespace WebApplication5.Controllers
         [HttpPost]
         public ActionResult Edita(int id, string Estacao, string Pdv, string Codigo)
         {
-            PDV pdv = new PDV();
-            List<PDV> lstPdv = new List<PDV>();
+            Pdv pdv = new Pdv();
+            List<Pdv> lstPdv = new List<Pdv>();
             lstPdv = pdv.GetAll();
             foreach (var i in lstPdv)
             {
@@ -89,7 +87,6 @@ namespace WebApplication5.Controllers
 
                 }
             }          
-
             
             return Redirect("/pdv/lista");
         }
@@ -97,8 +94,8 @@ namespace WebApplication5.Controllers
         [HttpGet]
         public ActionResult Excluir(int id)
         {
-            PDV pdv = new PDV();
-            List<PDV> lstPdv = new List<PDV>();
+            Pdv pdv = new Pdv();
+            List<Pdv> lstPdv = new List<Pdv>();
             lstPdv = pdv.GetAll();
             foreach (var i in lstPdv)
             {
@@ -114,8 +111,8 @@ namespace WebApplication5.Controllers
         [HttpPost]
         public ActionResult ExcluirConfirma(int id)
         {
-            List<PDV> lstPdv = new List<PDV>();
-            PDV pdv_exclui = new PDV();
+            List<Pdv> lstPdv = new List<Pdv>();
+            Pdv pdv_exclui = new Pdv();
             lstPdv = pdv_exclui.GetAll();
             foreach (var i in lstPdv)
             {

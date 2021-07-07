@@ -6,65 +6,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Entities
 {
-    public class PDV
+    public class Pdv
     {
         public int Id { get; set; }
-        public string Codigo  { get; set; }
-        public string PDV_nome { get; set; }
+        public string Codigo { get; set; }
+        public string Numero { get; set; }
         public string Estacao { get; set; }
 
-        public void SavePDV()
+        public void Save()
         {
-            BancoDeDados BancoDeDados = new BancoDeDados();
+            PdvDataAccess BancoDeDados = new PdvDataAccess();
             BancoDeDados.OpenConnection();
-            BancoDeDados.SetPDV(this.Estacao, this.PDV_nome, this.Codigo);
+            BancoDeDados.Save(this.Estacao, this.Numero, this.Codigo);
         }
 
         public void Update(int id, string Estacao, string Pdv, string Codigo)
         {
-            BancoDeDados BancoDeDados = new BancoDeDados();
+            PdvDataAccess BancoDeDados = new PdvDataAccess();
             BancoDeDados.OpenConnection();
-            BancoDeDados.UpdatePDV(id, Estacao, Pdv, Codigo);
+            BancoDeDados.Update(id, Estacao, Pdv, Codigo);
         }
 
-        public List<PDV> GetAll()
+        public List<Pdv> GetAll()
         {
-            BancoDeDados bd = new BancoDeDados();
-            bd.OpenConnection();
-            DataTable dtGetAll = bd.GetAllPDV();
+            PdvDataAccess BancoDeDados = new PdvDataAccess();
+            BancoDeDados.OpenConnection();
+            DataTable dtGetAll = BancoDeDados.GetAll();
 
-
-            //TODO - Pode ser um DTO
-            List<PDV> lstPdv = dtGetAll.AsEnumerable().
-            Select(x => new PDV
+            List<Pdv> lstPdv = dtGetAll.AsEnumerable().
+            Select(x => new Pdv
             {
                 Id = x.Field<int>("Id"),
                 Codigo = x.Field<string>("Codigo"),
-                PDV_nome = x.Field<string>("PDV_nome"),
+                Numero = x.Field<string>("NumeroSerie"),
                 Estacao = x.Field<string>("Estacao"),
             }).ToList();
             
             return lstPdv;
         }
 
-
-        public List<PDV> GetByEstacao(string estacao)
+        //Metodo Inativo - TODO
+        public List<Pdv> GetByEstacao(string estacao)
         {
-            BancoDeDados bd = new BancoDeDados();
-            bd.OpenConnection();
-            DataTable dtGetByEstacao = bd.GetPDVByEstacao(estacao);
+            PdvDataAccess BancoDeDados = new PdvDataAccess();
+            BancoDeDados.OpenConnection();
+            DataTable dtGetByEstacao = BancoDeDados.GetByEstacao(estacao);
 
             if (dtGetByEstacao != null)
             {
-                List<PDV> lstPdv = dtGetByEstacao.AsEnumerable().
-                    Select(x => new PDV
+                List<Pdv> lstPdv = dtGetByEstacao.AsEnumerable().
+                    Select(x => new Pdv
                 {
                     Id = x.Field<int>("Id"),
                     Codigo = x.Field<string>("Codigo"),
-                    PDV_nome = x.Field<string>("PDV_nome"),
+                    Numero = x.Field<string>("PDV_nome"),
                     Estacao = x.Field<string>("Estacao"),
                 }).ToList();
 
@@ -73,32 +70,27 @@ namespace Entities
 
             else
             {
-                DataTable dtGetAll = bd.GetAllPDV();
-
+                DataTable dtGetAll = BancoDeDados.GetAll();
 
                 //TODO - Pode ser um DTO
-                List<PDV> lstPdv = dtGetAll.AsEnumerable().
-                Select(x => new PDV
+                List<Pdv> lstPdv = dtGetAll.AsEnumerable().
+                Select(x => new Pdv
                 {
                     Id = x.Field<int>("Id"),
                     Codigo = x.Field<string>("Codigo"),
-                    PDV_nome = x.Field<string>("PDV_nome"),
+                    Numero = x.Field<string>("PDV_nome"),
                     Estacao = x.Field<string>("Estacao"),
                 }).ToList();
 
                 return lstPdv;
             }
-            //TODO - Pode ser um DTO
-            
-
-            
         }
 
         public void Delete(int id)
         {
-            BancoDeDados BancoDeDados = new BancoDeDados();
+            PdvDataAccess BancoDeDados = new PdvDataAccess();
             BancoDeDados.OpenConnection();
-            BancoDeDados.DeletePDV(id);
+            BancoDeDados.Delete(id);
         }
     }
 }
