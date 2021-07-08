@@ -25,9 +25,8 @@
 
             <th scope="col">Id</th>
             <th scope="col">Nome</th>
-            <th scope="col">Estação</th>
+            <th scope="col">Estação / Número Série</th>
             <th scope="col">Data</th>
-            <th scope="col">Codigo</th>
         </tr>
     </thead>
     <tbody>
@@ -36,9 +35,9 @@
             <tr>
                 <td scope="row">@arquivo.Id</td>
                 <td scope="row">@arquivo.Nome</td>
-                <td scope="row">@arquivo.Estacao</td>
+                <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
+                
                 <td scope="row">@arquivo.Data</td>
-                <td scope="row">@arquivo.Codigo</td>
             </tr>
         }
     </tbody>

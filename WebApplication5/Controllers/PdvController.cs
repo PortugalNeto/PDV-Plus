@@ -87,14 +87,13 @@ namespace WebApplication5.Controllers
         [HttpPost]
         public ActionResult Edita(int id, string Estacao, string Pdv, string Codigo)
         {
-            Pdv pdv = new Pdv();
             List<Pdv> lstPdv = new List<Pdv>();
-            lstPdv = pdv.GetAll();
-            foreach (var i in lstPdv)
+            lstPdv = new Pdv().GetAll();
+            foreach (var pdv in lstPdv)
             {
-                if (i.Id == id)
+                if (pdv.Id == id)
                 {
-                    i.Update(id, Estacao, Pdv, Codigo);
+                    pdv.Update(id, Estacao, Pdv, Codigo);
 
                 }
             }          

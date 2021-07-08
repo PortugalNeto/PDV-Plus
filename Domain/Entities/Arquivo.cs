@@ -11,19 +11,11 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Record
-    {
-        public int Id { get; set; }
-        public double Value { get; set; }
-        public DateTime Date { get; set; }
-    }
-    public class Arquivo
+    public class Arquivo : Pdv
     {
         public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime Data { get; set; }
-        public string Codigo { get; set; }
-        public string Estacao { get; set; }
         public int Id_pdv { get; set; }
 
         public void SaveFromDirectory()      // Vai às pastas e grava a InfoFile em banco
@@ -63,14 +55,16 @@ namespace Entities
             BancoDeDados.OpenConnection();
             DataTable dtGetAll = BancoDeDados.GetAll();
 
-
             //TODO - Pode ser um DTO
             List<Arquivo> lstArquivo = dtGetAll.AsEnumerable().
             Select(x => new Arquivo
             {
                 Id = x.Field<int>("Id"),
-                Nome = x.Field<string>("Nome"),     // InfoFile.Name()
-                Data = x.Field<DateTime>("Data"),   // InfoFile.Date()
+                Nome = x.Field<string>("Nome"),
+                Data = x.Field<DateTime>("Data"), 
+                Codigo = x.Field<string>("Codigo"),
+                Numero = x.Field<string>("Numero"),
+                Estacao = x.Field<string>("Estacao"),
 
             }).ToList();
 
@@ -89,7 +83,9 @@ namespace Entities
                 Nome = x.Field<string>("Nome"),
                 Data = x.Field<DateTime>("Data"),
                 Codigo = x.Field<string>("Codigo"),
+                Numero = x.Field<string>("Numero"),
                 Estacao = x.Field<string>("Estacao"),
+
             }).ToList();
             
             var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
@@ -113,6 +109,7 @@ namespace Entities
                     Nome = x.Field<string>("Nome"),
                     Data = x.Field<DateTime>("Data"),
                     Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
                     Estacao = x.Field<string>("Estacao"),
                 }).ToList();
 

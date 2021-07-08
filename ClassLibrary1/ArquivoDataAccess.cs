@@ -126,7 +126,9 @@ namespace Database
                     return null;
                 }
 
-                String sql = "select * from arquivo";
+                String sql = @"select * from arquivo a
+                               inner join pdv p
+                               on a.Id_pdv = p.Id";
                 DataTable dtArq = new DataTable();
                 MySqlDataAdapter daArq = new MySqlDataAdapter();
 
