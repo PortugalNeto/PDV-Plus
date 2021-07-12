@@ -9,14 +9,14 @@ namespace WebApplication5
 {
     public class RouteConfig
     {
+        private string alias { get; set; }
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{alias}/{controller}/{action}/{id}",
+                defaults: new { alias = "pdvplus",  controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

@@ -31,8 +31,7 @@ namespace WebApplication5.Controllers
             if (!pdv.ValidaPdv())
             {
                 pdv.Save();
-                ViewBag.Response = "Código Cadastrado com Sucesso!";
-                return Redirect("/pdv/lista");
+                return Redirect("/pdvplus/pdv/lista");
             }
             else
             {
@@ -98,7 +97,7 @@ namespace WebApplication5.Controllers
                 }
             }          
             
-            return Redirect("/pdv/lista");
+            return Redirect("/pdvplus/pdv/lista");
         }
 
         [HttpGet]
@@ -131,7 +130,7 @@ namespace WebApplication5.Controllers
                     i.Delete(id);
                 }
             }
-            return Redirect("/pdv/lista");
+            return Redirect("/pdvplus/pdv/lista");
         }
 	}
 }
