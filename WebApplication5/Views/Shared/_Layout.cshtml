@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Gerenciamento PDV</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap.min")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
 </head>
 <body>
@@ -40,6 +42,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/bootstrap.min")
     @RenderSection("scripts", required: false)
 </body>
 </html>
