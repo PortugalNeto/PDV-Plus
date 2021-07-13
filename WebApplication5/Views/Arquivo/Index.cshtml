@@ -3,7 +3,7 @@
     List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
     List<string> lstEstacao = ViewBag.ListaEstacao;
 }
-<h4>Filtro Estacao</h4>
+<h4>Filtro por Estacao</h4>
 <form action="/pdvplus/arquivo/Index" method="get">
     <div class="form-inline">
         <select name="estacao" class="form-control">
@@ -19,26 +19,41 @@
 <hr />
 <h2 class="text-center">Arquivos Comunicados</h2>
 <br />
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-
-            <th scope="col">Id</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Estação / Número Série</th>
-            <th scope="col">Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var arquivo in lstArquivos)
-        {
+<input type="button" class="btn btn-primary"  id="btnExport" value="Exportar para excel" />
+<br />
+<div id="listaArquivos">
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <td scope="row">@arquivo.Id</td>
-                <td scope="row">@arquivo.Nome</td>
-                <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
-                
-                <td scope="row">@arquivo.Data</td>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Estação / Número Série</th>
+                <th scope="col">Data</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var arquivo in lstArquivos)
+            {
+                <tr>
+                    <td scope="row">@arquivo.Id</td>
+                    <td scope="row">@arquivo.Nome</td>
+                    <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
+                    <td scope="row">@arquivo.Data</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $("#btnExport").click(function (e) {
+        var a = document.createElement('a');
+        var data_type = 'data:application/vnd.ms-excel';
+        var table_div = document.getElementById('listaArquivos');
+        var table_html = table_div.outerHTML.replace(/ /g, '%20');
+        a.href = data_type + ', ' + table_html;
+        a.download = 'ArquivosComunicados.xls';
+        a.click();
+        e.preventDefault();
+    });
+</script>
