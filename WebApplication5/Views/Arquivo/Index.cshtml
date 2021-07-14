@@ -24,6 +24,7 @@
 <hr />
 <h2 class="text-center">Arquivos Comunicados</h2>
 <br />
+<<<<<<< HEAD
 <input type="button" class="btn btn-primary"  id="btnExport" value="Exportar para excel" />
 <br />
 <div id="listaArquivos">
@@ -34,6 +35,28 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Estação / Número Série</th>
                 <th scope="col">Data</th>
+=======
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Estação</th>
+            <th scope="col">Data</th>
+            <th scope="col">Codigo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var arquivo in lstArquivos)
+        {
+            <tr>
+                <td scope="row">@arquivo.Id</td>
+                <td scope="row">@arquivo.Nome</td>
+                <td scope="row">@arquivo.Estacao</td>
+                <td scope="row">@arquivo.Data</td>
+                <td scope="row">@arquivo.Codigo</td>
+>>>>>>> parent of 10a73a3 (Correção front campo "numero de série")
             </tr>
         </thead>
         <tbody>

@@ -81,7 +81,7 @@ namespace Database
                     return null;
                 }
 
-                String sql = @"select * from pdv";
+                String sql = "select * from pdv";
                 DataTable dtPDV = new DataTable();
                 MySqlDataAdapter daPDV = new MySqlDataAdapter();
 
@@ -136,55 +136,6 @@ namespace Database
                 //ToolsBLL.gerarLog(e, "Problema ao autenticar. ConnectionBD.cs");
                 return null;
             }
-        }
-        
-        public bool GetByCode(string codigo)
-        {
-            try
-            {
-                try
-                {
-                    if (mConn.State != ConnectionState.Open)
-                    {
-                        mConn.Open();
-                    }
-                }
-                catch (Exception e)
-                {
-                    //ToolsBLL.gerarLog(e, "Problema de Conexão ao banco. ConnectionBD.cs");
-                    return false;
-                }
-
-                String sql = "select * from pdv where codigo = @codigo";
-
-                MySqlCommand cmd = new MySqlCommand(sql, mConn);
-                cmd.Parameters.AddWithValue("@codigo", codigo);
-
-                MySqlDataReader myReader = cmd.ExecuteReader();
-
-                try
-                {
-                    if (myReader.Read())
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                catch (Exception e)
-                {
-                    //ToolsBLL.gerarLog(e, "Problema no banco ao mudar o Password. ConnectionBD.cs");
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                //ToolsBLL.gerarLog(e, "Problema ao mudar o Password. ConnectionBD.cs");
-                return false;
-            }
-            return true;
         }
 
         public bool Save(string estacao, string numero, string codigo)
