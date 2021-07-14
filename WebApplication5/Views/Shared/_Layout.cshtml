@@ -24,9 +24,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">                    
-                    <li><a href="/pdvplus/pdv/cadastro">Cadastrar</a></li>
-                    <li><a href="/pdvplus/pdv/lista">Lista de PDV Cadastrado</a></li>
-                    <li><a href="/pdvplus/arquivo/index">Verificar Comunicação</a></li>
+                    <li><a href="/pdv/cadastro">Cadastrar</a></li>
+                    <li><a href="/pdv/lista">Lista de PDV Cadastrado</a></li>
+                    <li><a href="/arquivo/index">Verificar Comunicação</a></li>
                 </ul>
                 @*@Html.Partial("_LoginPartial")*@
             </div>
@@ -36,7 +36,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year / @DateTime.Now.Month / @DateTime.Now.Day - <i>Radix</i></p>
+            <p>&copy; @DateTime.Now.Year/@DateTime.Now.Month/@DateTime.Now.Day - Radix</p>
         </footer>
     </div>
 
