@@ -39,9 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\ArquivoDTO.cs" />
-    <Compile Include="Entities\Arquivo.cs" />
-    <Compile Include="Entities\Pdv.cs" />
+    <Compile Include="Arquivo.cs" />
+    <Compile Include="Pdv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

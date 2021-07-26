@@ -31,7 +31,8 @@ namespace WebApplication5.Controllers
             if (!pdv.ValidaPdv())
             {
                 pdv.Save();
-                return Redirect("/pdvplus/pdv/lista");
+                ViewBag.Response = "Código Cadastrado com Sucesso!";
+                return Redirect("/pdv/lista");
             }
             else
             {
@@ -86,18 +87,19 @@ namespace WebApplication5.Controllers
         [HttpPost]
         public ActionResult Edita(int id, string Estacao, string Pdv, string Codigo)
         {
+            Pdv pdv = new Pdv();
             List<Pdv> lstPdv = new List<Pdv>();
-            lstPdv = new Pdv().GetAll();
-            foreach (var pdv in lstPdv)
+            lstPdv = pdv.GetAll();
+            foreach (var i in lstPdv)
             {
-                if (pdv.Id == id)
+                if (i.Id == id)
                 {
-                    pdv.Update(id, Estacao, Pdv, Codigo);
+                    i.Update(id, Estacao, Pdv, Codigo);
 
                 }
             }          
             
-            return Redirect("/pdvplus/pdv/lista");
+            return Redirect("/pdv/lista");
         }
 
         [HttpGet]
@@ -130,7 +132,7 @@ namespace WebApplication5.Controllers
                     i.Delete(id);
                 }
             }
-            return Redirect("/pdvplus/pdv/lista");
+            return Redirect("/pdv/lista");
         }
 	}
 }
