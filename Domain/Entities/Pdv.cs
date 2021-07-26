@@ -98,9 +98,7 @@ namespace Entities
             PdvDataAccess BancoDeDados = new PdvDataAccess();
             BancoDeDados.OpenConnection();
 
-            var teste = BancoDeDados.GetAll().AsEnumerable().Where(x => x.Field<string>("Codigo").Contains(this.Codigo)).Any();
-
-            return BancoDeDados.GetAll().AsEnumerable().Where(x => x.Field<string>("Codigo").Contains(this.Codigo)).Any();
+            return BancoDeDados.GetByCode(this.Codigo);
         }
     }
 }
