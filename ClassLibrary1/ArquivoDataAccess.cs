@@ -17,10 +17,10 @@ namespace Database
 
         public ArquivoDataAccess()
         {
-            string bdServer = "localhost";
+            string bdServer = "10.144.63.24";
             string bdServerDatabase = "sistema_pdv";
-            string bdUser = "root";
-            string bdPwd = "";
+            string bdUser = "strange";
+            string bdPwd = "supervia";
 
             sConnectionMysqlString = "Persist Security Info=False;server=" + bdServer + ";database=" + bdServerDatabase + ";uid=" + bdUser + ";pwd=" + bdPwd;
         }
@@ -126,7 +126,9 @@ namespace Database
                     return null;
                 }
 
-                String sql = "select * from arquivo";
+                String sql = @"select * from arquivo a
+                               inner join pdv p
+                               on a.Id_pdv = p.Id";
                 DataTable dtArq = new DataTable();
                 MySqlDataAdapter daArq = new MySqlDataAdapter();
 

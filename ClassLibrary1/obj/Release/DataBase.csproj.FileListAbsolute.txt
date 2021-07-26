@@ -1,0 +1,7 @@
+C:\Users\mauricio.rezende\Documents\PdvPlus-Novo\ClassLibrary1\obj\Release\DataBase.csprojResolveAssemblyReference.cache
+C:\Users\mauricio.rezende\Documents\PdvPlus-Novo\ClassLibrary1\bin\Release\ClassLibrary1.dll.config
+C:\Users\mauricio.rezende\Documents\PdvPlus-Novo\ClassLibrary1\bin\Release\ClassLibrary1.dll
+C:\Users\mauricio.rezende\Documents\PdvPlus-Novo\ClassLibrary1\bin\Release\ClassLibrary1.pdb
+C:\Users\mauricio.rezende\Documents\PdvPlus-Novo\ClassLibrary1\bin\Release\MySql.Data.dll
+C:\Users\mauricio.rezende\Documents\PdvPlus-Novo\ClassLibrary1\obj\Release\ClassLibrary1.dll
+C:\Users\mauricio.rezende\Documents\PdvPlus-Novo\ClassLibrary1\obj\Release\ClassLibrary1.pdb

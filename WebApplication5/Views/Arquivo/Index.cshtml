@@ -3,17 +3,8 @@
     List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
     List<string> lstEstacao = ViewBag.ListaEstacao;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<h4>Filtro por Estacao</h4>
-=======
-<h4>Filtro Estacao</h4>
->>>>>>> parent of 3903a0f (Exportando tabela no formato do Excel;)
+<h4>Filtro por Estação</h4>
 <form action="/pdvplus/arquivo/Index" method="get">
-=======
-<h4>Filtro Estacao</h4>
-<form action="/arquivo/Index" method="get">
->>>>>>> parent of efd87ef (Adding the url alias and adjusting the controllers and links;)
     <div class="form-inline">
         <select name="estacao" class="form-control">
             <option></option>
@@ -28,62 +19,51 @@
 <hr />
 <h2 class="text-center">Arquivos Comunicados</h2>
 <br />
-<<<<<<< HEAD
-<<<<<<< HEAD
-<input type="button" class="btn btn-primary"  id="btnExport" value="Exportar para excel" />
+<div class="text-right">
+    <button class="btn btn-success" id="btnExport">Exportar planilha  
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
+        </svg>
+    </button>
+</div>
 <br />
+<div>
+    <br />
+</div>
 <div id="listaArquivos">
     <table class="table">
         <thead class="thead-dark">
             <tr>
+
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Estação / Número Série</th>
                 <th scope="col">Data</th>
-=======
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-
-            <th scope="col">Id</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Estação</th>
-            <th scope="col">Data</th>
-            <th scope="col">Codigo</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var arquivo in lstArquivos)
-        {
-            <tr>
-                <td scope="row">@arquivo.Id</td>
-                <td scope="row">@arquivo.Nome</td>
-                <td scope="row">@arquivo.Estacao</td>
-                <td scope="row">@arquivo.Data</td>
-                <td scope="row">@arquivo.Codigo</td>
->>>>>>> parent of 10a73a3 (Correção front campo "numero de série")
-=======
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-
-            <th scope="col">Id</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Estação / Número Série</th>
-            <th scope="col">Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var arquivo in lstArquivos)
-        {
-            <tr>
-                <td scope="row">@arquivo.Id</td>
-                <td scope="row">@arquivo.Nome</td>
-                <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
-                
-                <td scope="row">@arquivo.Data</td>
->>>>>>> parent of 3903a0f (Exportando tabela no formato do Excel;)
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var arquivo in lstArquivos)
+            {
+                <tr>
+                    <td scope="row">@arquivo.Id</td>
+                    <td scope="row">@arquivo.Nome</td>
+                    <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
+                    <td scope="row">@arquivo.Data</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $("#btnExport").click(function (e) {
+        var a = document.createElement('a');
+        var data_type = 'data:application/vnd.ms-excel';
+        var table_div = document.getElementById('listaArquivos');
+        var table_html = table_div.outerHTML.replace(/ /g, '%20');
+        a.href = data_type + ', ' + table_html;
+        a.download = 'ArquivosComunicados.xls';
+        a.click();
+        e.preventDefault();
+    });
+</script>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Lista";
+    Entities.Pdv pdv = ViewBag.pdv;
+    
+}
+
+<h2 class="text-center">Edição de PDV</h2>
+
+<form action="/pdvplus/pdv/edita?id=@pdv.Id" method="post">
+    <div class="form-group" >
+        <label for="nome">Estação</label>
+        <input type="text" value="@pdv.Estacao" name="estacao" class="form-control" id="Codigo" placeholder="Estação" required>
+    </div>
+    <div class="form-group">
+        <label for="PDV">PDV</label>
+        <input type="text" value="@pdv.Numero" name="pdv" class="form-control" id="pdv" placeholder="Número do PDV">
+    </div>
+    <div class="form-group">
+        <label for="data">Código</label>
+        <input type="text" value="@pdv.Codigo" name="codigo" class="form-control" id="data" placeholder="Código" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+</form>
+
