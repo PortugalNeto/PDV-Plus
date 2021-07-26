@@ -17,10 +17,10 @@ namespace Database
 
         public PdvDataAccess()
         {
-            string bdServer = "10.144.63.24";
+            string bdServer = "localhost";
             string bdServerDatabase = "sistema_pdv";
-            string bdUser = "strange";
-            string bdPwd = "supervia";
+            string bdUser = "root";
+            string bdPwd = "";
 
             sConnectionMysqlString = "Persist Security Info=False;server=" + bdServer + ";database=" + bdServerDatabase + ";uid=" + bdUser + ";pwd=" + bdPwd;
         }
