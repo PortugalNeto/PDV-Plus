@@ -22,31 +22,91 @@ namespace Entities
         {
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
             BancoDeDados.OpenConnection();
-            //DirectoryInfo dir = new DirectoryInfo(@"C:\Origem");    // Diretório Exemplo!!!
 
-            //Pdv pdv = new Pdv();
-            //List<Pdv> lstPdv = pdv.GetAll();
+            string root = @"\\10.144.63.24\Imp\Empresa1\Garagem";
+            string dirYear = DateTime.Now.ToString("yyyy");
+            string dirMonth = DateTime.Now.ToString("MM");
+            string dirMonth1before = DateTime.Now.AddMonths(-1).ToString("MM");
+            string dirMonth2before = DateTime.Now.AddMonths(-2).ToString("MM");
+            string dirnow = Path.Combine(root, dirYear, dirMonth);
+            string dir1monthbefore = Path.Combine(root, dirYear, dirMonth1before);
+            string dir2monthbefore = Path.Combine(root, dirYear, dirMonth2before);
 
-            //Arquivo arquivo = new Arquivo();
 
-            //List<string> lstNomeArquivo = BancoDeDados.GetAll().AsEnumerable().
-            //   Select(x => x.Field<string>("Nome")).ToList();
 
-            //foreach (FileInfo item in dir.GetFiles("*.*", SearchOption.AllDirectories).
-            //           Where(x => x.Name.EndsWith("pdv")))
-            //{
-            //    arquivo.Nome = item.Name;
-            //    string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
-            //    arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
-            //    arquivo.Codigo = item.Name.Substring(27, 8);
-            //    arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
-            //    arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+            DirectoryInfo dir1 = new DirectoryInfo(root);    // Diretório Exemplo!!!
+            DirectoryInfo dir2 = new DirectoryInfo(dirnow);
+            DirectoryInfo dir3 = new DirectoryInfo(dir1monthbefore);
+            DirectoryInfo dir4 = new DirectoryInfo(dir2monthbefore);
+            
 
-            //    if (!lstNomeArquivo.Contains(arquivo.Nome))
-            //    {
-            //        BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
-            //    }
-            //}
+            Pdv pdv = new Pdv();
+            List<Pdv> lstPdv = pdv.GetAll();
+
+            Arquivo arquivo = new Arquivo();
+
+            List<string> lstNomeArquivo = BancoDeDados.GetAll().AsEnumerable().
+               Select(x => x.Field<string>("Nome")).ToList();
+
+            foreach (FileInfo item in dir1.GetFiles("*.pdv*", SearchOption.TopDirectoryOnly))
+            {
+                arquivo.Nome = item.Name;
+                string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
+                arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
+                arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+
+                if (!lstNomeArquivo.Contains(arquivo.Nome))
+                {
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                }
+            }
+
+            foreach (FileInfo item in dir2.GetFiles("*.pdv*", SearchOption.AllDirectories))
+            {
+                arquivo.Nome = item.Name;
+                string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
+                arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
+                arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+
+                if (!lstNomeArquivo.Contains(arquivo.Nome))
+                {
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                }
+            }
+
+            foreach (FileInfo item in dir3.GetFiles("*.pdv*", SearchOption.AllDirectories))
+            {
+                arquivo.Nome = item.Name;
+                string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
+                arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
+                arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+
+                if (!lstNomeArquivo.Contains(arquivo.Nome))
+                {
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                }
+            }
+
+            foreach (FileInfo item in dir4.GetFiles("*.pdv*", SearchOption.AllDirectories))
+            {
+                arquivo.Nome = item.Name;
+                string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
+                arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
+                arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+
+                if (!lstNomeArquivo.Contains(arquivo.Nome))
+                {
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                }
+            }
         }
 
         public List<Arquivo> GetAll()       // Vai ao banco e pega todos os últimos registros de cada PDV
