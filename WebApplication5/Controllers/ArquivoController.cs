@@ -17,7 +17,6 @@ namespace WebApplication5.Controllers
         public ActionResult Index(string estacao)
         {
             Arquivo arquivo = new Arquivo();
-            arquivo.SaveFromDirectory();
             
             List<Arquivo> lstArquivo = new List<Arquivo>();
 
@@ -34,6 +33,15 @@ namespace WebApplication5.Controllers
             ViewBag.ListaEstacao = new Pdv().GetAll().Select(x => x.Estacao).Distinct().ToList();
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Salvar()
+        {
+            Arquivo arquivo = new Arquivo();
+            arquivo.SaveFromDirectory();
+
+            return Redirect("index");
         }
     }
 }

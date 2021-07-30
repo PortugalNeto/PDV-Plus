@@ -64,7 +64,7 @@ namespace Database
             return true;
         }
 
-        public bool Save(string Nome, DateTime Data, string Codigo, string Estacao, int Id_pdv)
+        public bool Save(string Nome, DateTime Data, int Id_pdv)
         {
             try
             {
@@ -81,14 +81,12 @@ namespace Database
                     return false;
                 }
 
-                String sql = "insert into arquivo (Nome, Data, Codigo, Estacao, Id_pdv) " +
-                             "values (@nome, @data, @codigo, @Estacao, @Id_pdv)";
+                String sql = "insert into arquivo (Nome, Data, Id_pdv) " +
+                             "values (@nome, @data, @Id_pdv)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
                 cmd.Parameters.AddWithValue("@nome", Nome);
                 cmd.Parameters.AddWithValue("@data", Data);
-                cmd.Parameters.AddWithValue("@Codigo", Codigo);
-                cmd.Parameters.AddWithValue("@Estacao", Estacao);
                 cmd.Parameters.AddWithValue("@Id_pdv", Id_pdv);
 
                 try

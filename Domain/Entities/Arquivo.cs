@@ -33,8 +33,7 @@ namespace Entities
             string dir2monthbefore = Path.Combine(root, dirYear, dirMonth2before);
 
 
-
-            DirectoryInfo dir1 = new DirectoryInfo(root);    // Diretório Exemplo!!!
+            DirectoryInfo dir1 = new DirectoryInfo(root);    
             DirectoryInfo dir2 = new DirectoryInfo(dirnow);
             DirectoryInfo dir3 = new DirectoryInfo(dir1monthbefore);
             DirectoryInfo dir4 = new DirectoryInfo(dir2monthbefore);
@@ -48,33 +47,35 @@ namespace Entities
             List<string> lstNomeArquivo = BancoDeDados.GetAll().AsEnumerable().
                Select(x => x.Field<string>("Nome")).ToList();
 
+            
             foreach (FileInfo item in dir1.GetFiles("*.pdv*", SearchOption.TopDirectoryOnly))
             {
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
-                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
                 }
             }
+
 
             foreach (FileInfo item in dir2.GetFiles("*.pdv*", SearchOption.AllDirectories))
             {
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
-                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
                 }
             }
 
@@ -83,13 +84,13 @@ namespace Entities
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
-                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
                 }
             }
 
@@ -98,13 +99,13 @@ namespace Entities
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
-                arquivo.Codigo = item.Name.Substring(27, 8);
+                arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Codigo, arquivo.Estacao, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
                 }
             }
         }
