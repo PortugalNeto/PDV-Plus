@@ -56,6 +56,7 @@ namespace Entities
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+                arquivo.Status = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Status).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
@@ -72,6 +73,7 @@ namespace Entities
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+                arquivo.Status = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Status).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
@@ -87,6 +89,7 @@ namespace Entities
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+                arquivo.Status = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Status).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
@@ -102,6 +105,7 @@ namespace Entities
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
+                arquivo.Status = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Status).FirstOrDefault();
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
@@ -126,7 +130,7 @@ namespace Entities
                 Codigo = x.Field<string>("Codigo"),
                 Numero = x.Field<string>("Numero"),
                 Estacao = x.Field<string>("Estacao"),
-
+                Status = x.Field<string>("Status"),
             }).ToList();
 
             return lstArquivo;
@@ -146,6 +150,7 @@ namespace Entities
                 Codigo = x.Field<string>("Codigo"),
                 Numero = x.Field<string>("Numero"),
                 Estacao = x.Field<string>("Estacao"),
+                Status = x.Field<string>("Status"),
 
             }).ToList();
             
@@ -172,6 +177,7 @@ namespace Entities
                     Codigo = x.Field<string>("Codigo"),
                     Numero = x.Field<string>("Numero"),
                     Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
                 }).ToList();
 
             var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)

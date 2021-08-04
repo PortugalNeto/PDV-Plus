@@ -17,6 +17,7 @@ namespace WebApplication5.Controllers
         public ActionResult Index(string estacao)
         {
             Arquivo arquivo = new Arquivo();
+            Pdv pdv = new Pdv();
             
             List<Arquivo> lstArquivo = new List<Arquivo>();
 

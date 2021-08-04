@@ -5,7 +5,7 @@
 }
 <div class="hidden">
     <form action="/pdvplus/arquivo/salvar" method="post">
-        <button type="submit" class="hidden" id="salvabtn"></button>
+        <button class="hidden" type="submit" id="salvabtn">Atualizar</button>
     </form> 
 </div>
 <h4 class="text-center">Página atualizada automaticamente duas vezes por dia</h4>
@@ -45,6 +45,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Estação / Número Série</th>
                 <th scope="col">Data</th>
+                <th scope="col">Status PDV</th>
             </tr>
         </thead>
         <tbody>
@@ -55,6 +56,7 @@
                     <td scope="row">@arquivo.Nome</td>
                     <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
                     <td scope="row">@arquivo.Data</td>
+                    <td scope="row">@arquivo.Status</td>
                 </tr>
             }
         </tbody>
