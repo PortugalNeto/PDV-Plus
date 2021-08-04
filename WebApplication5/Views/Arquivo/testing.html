@@ -1,28 +1,20 @@
-﻿@{
-    ViewBag.Title = "Lista";
-    Entities.Pdv pdv = ViewBag.pdv;
-    
-}
-
-<h2 class="text-center">Edição de PDV</h2>
-<br />
-<form action="/pdvplus/pdv/edita?id=@pdv.Id" method="post">
+<form action="/pdvplus/pdv/cadastro" method="post">
     <div class="form-group row">
         <label for="nome" class="col-sm-2 col-form-label">Estação</label>
         <div class="col-sm-10">
-            <input type="text" value="@pdv.Estacao" name="estacao" class="form-control" id="Codigo" placeholder="Estação" required>
+            <input type="text" name="estacao" class="form-control" id="Codigo" placeholder="Estação" required>
         </div>
     </div>
     <div class="form-group row">
         <label for="pdv" class="col-sm-2 col-form-label">Número do Sigom</label>
         <div class="col-sm-10">
-            <input type="text" value="@pdv.Numero" name="pdv" class="form-control" id="pdv" placeholder="Número do PDV" required>
+            <input type="text" name="pdv" class="form-control" id="pdv" placeholder="Número do PDV" required>
         </div>
     </div>
     <div class="form-group row">
         <label for="data" class="col-sm-2 col-form-label">Código Sigom</label>
         <div class="col-sm-10">
-            <input type="text" value="@pdv.Codigo" name="codigo" class="form-control" id="data" placeholder="Código Sigom" required>
+            <input type="text" name="codigo" class="form-control" id="data" placeholder="Código Sigom" required>
         </div>
     </div>
     <fieldset class="form-group">
@@ -30,8 +22,8 @@
             <legend class="col-form-label col-sm-2 pt-0">Status do PDV</legend>
             <div class="col-sm-10">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Status" id="Ativo" value="Ativo" checked>
-                    <label class="form-check-label" for="Ativo">
+                    <input class="form-check-input" type="radio" name="Status" id="gridRadios1" value="Ativo" checked>
+                    <label class="form-check-label" for="gridRadios1">
                         Ativo
                     </label>
                 </div>
@@ -41,7 +33,7 @@
                         Reserva
                     </label>
                 </div>
-                <div class="form-check">
+                <div class="form-check disabled">
                     <input class="form-check-input" type="radio" name="Status" id="Manutenção" value="Manutenção">
                     <label class="form-check-label" for="Manutenção">
                         Manutenção
@@ -52,9 +44,7 @@
     </fieldset>
     <div class="form-group row">
         <div class="col-sm-10">
-            <br />
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </div>
     </div>
 </form>
-

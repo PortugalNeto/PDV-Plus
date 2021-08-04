@@ -21,12 +21,13 @@ namespace WebApplication5.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastro(string Estacao, string Pdv, string Codigo)
+        public ActionResult Cadastro(string Estacao, string Pdv, string Codigo, string Status)
         {
             Pdv pdv = new Pdv();
             pdv.Estacao = Estacao;
             pdv.Numero = Pdv;
             pdv.Codigo = Codigo;
+            pdv.Status = Status;
 
             if (!pdv.ValidaPdv())
             {
@@ -84,7 +85,7 @@ namespace WebApplication5.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edita(int id, string Estacao, string Pdv, string Codigo)
+        public ActionResult Edita(int id, string Estacao, string Pdv, string Codigo, string Status)
         {
             List<Pdv> lstPdv = new List<Pdv>();
             lstPdv = new Pdv().GetAll();
@@ -92,7 +93,7 @@ namespace WebApplication5.Controllers
             {
                 if (pdv.Id == id)
                 {
-                    pdv.Update(id, Estacao, Pdv, Codigo);
+                    pdv.Update(id, Estacao, Pdv, Codigo, Status);
 
                 }
             }          

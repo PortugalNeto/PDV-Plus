@@ -187,7 +187,7 @@ namespace Database
             return true;
         }
 
-        public bool Save(string estacao, string numero, string codigo)
+        public bool Save(string estacao, string numero, string codigo, string status)
         {
             try
             {
@@ -204,13 +204,14 @@ namespace Database
                     return false;
                 }
 
-                String sql = "insert into pdv (Estacao, Numero, Codigo)" +
-                             "values (@estacao, @numero, @codigo)";
+                String sql = "insert into pdv (Estacao, Numero, Codigo, Status)" +
+                             "values (@estacao, @numero, @codigo, @status)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
                 cmd.Parameters.AddWithValue("@estacao", estacao);
                 cmd.Parameters.AddWithValue("@numero", numero);
                 cmd.Parameters.AddWithValue("@codigo", codigo);
+                cmd.Parameters.AddWithValue("@status", status);
 
                 try
                 {
@@ -230,7 +231,7 @@ namespace Database
             return true;
         }
 
-        public bool Update(int id, string estacao, string numero, string codigo)
+        public bool Update(int id, string estacao, string numero, string codigo, string status)
         {
             try
             {
@@ -250,13 +251,15 @@ namespace Database
                 String sql = "UPDATE pdv " +
                                 "SET Estacao = @estacao, " +
                                     "Numero = @numero, " +
-                                        "Codigo = @codigo " +
-                                            "where Id = @id";
+                                        "Codigo = @codigo, " +
+                                            "Status = @status " +
+                                                "where Id = @id";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
                 cmd.Parameters.AddWithValue("@estacao", estacao);
                 cmd.Parameters.AddWithValue("@numero", numero);
                 cmd.Parameters.AddWithValue("@codigo", codigo);
+                cmd.Parameters.AddWithValue("@status", status);
                 cmd.Parameters.AddWithValue("@id", id);
 
                 try

@@ -14,19 +14,20 @@ namespace Entities
         public string Codigo { get; set; }
         public string Numero { get; set; }
         public string Estacao { get; set; }
+        public string Status { get; set; }
 
         public void Save()
         {
             PdvDataAccess BancoDeDados = new PdvDataAccess();
             BancoDeDados.OpenConnection();
-            BancoDeDados.Save(this.Estacao, this.Numero, this.Codigo);
+            BancoDeDados.Save(this.Estacao, this.Numero, this.Codigo, this.Status);
         }
 
-        public void Update(int id, string Estacao, string Pdv, string Codigo)
+        public void Update(int id, string Estacao, string Pdv, string Codigo, string Status)
         {
             PdvDataAccess BancoDeDados = new PdvDataAccess();
             BancoDeDados.OpenConnection();
-            BancoDeDados.Update(id, Estacao, Pdv, Codigo);
+            BancoDeDados.Update(id, Estacao, Pdv, Codigo, Status);
         }
 
         public List<Pdv> GetAll()
@@ -42,6 +43,7 @@ namespace Entities
                 Codigo = x.Field<string>("Codigo"),
                 Numero = x.Field<string>("Numero"),
                 Estacao = x.Field<string>("Estacao"),
+                Status = x.Field<string>("Status"),
             }).ToList();
             
             return lstPdv;
@@ -63,6 +65,7 @@ namespace Entities
                     Codigo = x.Field<string>("Codigo"),
                     Numero = x.Field<string>("Numero"),
                     Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
                 }).ToList();
 
                 return lstPdv;
@@ -80,6 +83,7 @@ namespace Entities
                     Codigo = x.Field<string>("Codigo"),
                     Numero = x.Field<string>("Numero"),
                     Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
                 }).ToList();
 
                 return lstPdv;
