@@ -3,12 +3,9 @@
     List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
     List<string> lstEstacao = ViewBag.ListaEstacao;
 }
-<div>
-    <br />
-</div>
-<div>
+<div class="hidden">
     <form action="/pdvplus/arquivo/salvar" method="post">
-        <button style=" opacity: 0.7; " class=" btn btn-primary" type="submit" id="salvabtn"><b>Atualizar Manualmente</b></button>
+        <button class="hidden" type="submit" id="salvabtn">Atualizar</button>
     </form> 
 </div>
 <h4 class="text-center">Página atualizada automaticamente duas vezes por dia</h4>
