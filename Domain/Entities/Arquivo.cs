@@ -17,6 +17,7 @@ namespace Entities
         public string Nome { get; set; }
         public DateTime Data { get; set; }
         public int Id_pdv { get; set; }
+        public int Sequencial { get; set; }
 
         public void SaveFromDirectory()      // Vai às pastas e grava a InfoFile em banco
         {
