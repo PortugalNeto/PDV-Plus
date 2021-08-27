@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Verificação Sequencial";
+    List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
+    List<string> lstEstacao = ViewBag.ListaEstacao;
+}
+<head>
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/Bootstrap-Theme.css" rel="stylesheet" />
+</head>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-light" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light" style="color: black;">Filtros</div>
+                <div>
+                    <div class="row g-5 align-items-end">
+                        <form action="/pdvplus/sequencial/Index" method="get">
+                            <div class="col-3">
+                                <h4>Selecione a Estação:</h4>
+                                <select id="estacao" name="estacao" class="form-control" required>
+                                    <option>Selecione a Estação</option>
+                                    @foreach (string estacao in lstEstacao)
+                                    {
+                                        <option>@estacao</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-primary" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                        <form action="/pdvplus/sequencial/Index" method="get">
+                            <div class="col-3">
+                                <h4>Selecione o Código:</h4>
+                                <select id="codigo" name="codigo" class="form-control" required>
+                                    <option>Código</option>
+                                    @foreach (string estacao in lstEstacao)
+                                    {
+                                        <option>@estacao</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-primary" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Page content-->
+            <br />
+            <div class="container-fluid">
+                <div class="form-check-label">
+                    <button class="btn-sm btn-primary" style="padding-left: 50px; border-radius: 5px;" id="sidebarToggle">Escolha os Filtros</button>
+                    <h2 class="text-center">Área de Verificação Sequencial</h2>
+                </div>
+                <p></p>
+                <p>
+                    Make sure to keep all page content within the
+                    <code>#page-content-wrapper</code>
+                    . The top navbar is optional, and just for demonstration. Just create an element with the
+                    <code>#sidebarToggle</code>
+                    ID which will toggle the menu when clicked.
+                </p>
+            </div>
+        </div>
+    </div>
+    @*<!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>*@
+
+

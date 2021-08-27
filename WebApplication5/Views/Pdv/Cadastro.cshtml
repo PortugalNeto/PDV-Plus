@@ -7,14 +7,14 @@
 {
     <h4 class="text-center">@response</h4>
 }
-
-<h2>Cadastro de PDV</h2>
 <br />
-<form action="/pdvplus/pdv/cadastro" method="post">
+<h2 style="text-align: center">Cadastro de PDV</h2>
+<br />
+<form action="/pdvplus/pdv/cadastro" method="post" style="align-content: center">
     <div class="form-group row">
         <label for="nome" class="col-sm-2 col-form-label">Estação</label>
         <div class="col-sm-10">
-            <input type="text" name="estacao" class="form-control" id="Codigo" placeholder="Estação" required>
+            <input type="text" name="estacao" class="form-control" id="nome" placeholder="Estação" required>
         </div>
     </div>
     <div class="form-group row">
@@ -30,6 +30,8 @@
         </div>
     </div>
     <fieldset class="form-group">
+        <div class="row">
+        </div>
         <div class="row">
             <legend class="col-form-label col-sm-2 pt-0">Status do PDV</legend>
             <div class="col-sm-10">

@@ -9,13 +9,14 @@
 
 <div>
     <form action="/pdvplus/arquivo/salvar" method="post">
-        <button style="opacity : 0.65" class="btn btn-primary"  type="submit" id="salvabtn">Forçar comunicação manual</button>
+        <button style="opacity : 0.75; text-emphasis-color: black;" class="btn btn-warning"  type="submit" id="salvabtn">Forçar comunicação manual</button>
     </form> 
 </div>
-<h4 class="text-center">Página atualizada automaticamente duas vezes por dia</h4>
+<h3 class="text-center">Página atualizada automaticamente duas vezes por dia</h3>
+<h4 class="text-center">FAVOR deixar esta ABA ABERTA</h4>
 <h4>Filtro por Estação</h4>
 <form action="/pdvplus/arquivo/Index" method="get">
-    <div class="form-inline">
+    <div class="form">
         <select name="estacao" class="form-control">
             <option></option>
             @foreach (string estacao in lstEstacao)
@@ -23,6 +24,7 @@
                 <option>@estacao</option>
             }
         </select>
+        <br />
         <button type="submit" class="btn btn-primary">Filtrar</button>
     </div>
 </form>
@@ -47,7 +49,7 @@
 
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Estação / Número Série</th>
+                <th scope="col">Estação / N° Sr</th>
                 <th scope="col">Data</th>
                 <th scope="col">Status PDV</th>
             </tr>

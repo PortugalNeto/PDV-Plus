@@ -1,0 +1,33 @@
+﻿@model Entities.Arquivo
+
+@{
+    ViewBag.Title = "Detalhes do PDV";
+    List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
+}
+<br />
+<h2 class="text-center">Detalhes do PDV</h2>
+<br />
+<h5 class="text-center">Quantidade de Arquivos : @lstArquivos.Count() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Inicial: @lstArquivos.Select(x => x.Sequencial).Min() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Final: @lstArquivos.Select(x => x.Sequencial).Max()</h5>
+<br />
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Estação</th>
+            <th scope="col">Número Pdv</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var arq in lstArquivos)
+        {
+            <tr>
+                <th scope="row">@arq.Codigo</th>
+                <td>@arq.Estacao</td>
+                <td>@arq.Numero</td>
+                <td>@arq.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

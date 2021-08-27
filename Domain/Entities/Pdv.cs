@@ -104,6 +104,7 @@ namespace Entities
 
             return BancoDeDados.GetByCode(this.Codigo);
         }
+
     }
 }
 

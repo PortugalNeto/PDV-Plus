@@ -17,10 +17,10 @@ namespace Database
 
         public ArquivoDataAccess()
         {
-            string bdServer = "10.144.63.24";
+            string bdServer = "localhost";
             string bdServerDatabase = "sistema_pdv";
-            string bdUser = "strange";
-            string bdPwd = "supervia";
+            string bdUser = "root";
+            string bdPwd = "";
 
             sConnectionMysqlString = "Persist Security Info=False;server=" + bdServer + ";database=" + bdServerDatabase + ";uid=" + bdUser + ";pwd=" + bdPwd;
         }
@@ -64,7 +64,7 @@ namespace Database
             return true;
         }
 
-        public bool Save(string Nome, DateTime Data, int Id_pdv)
+        public bool Save(string Nome, DateTime Data, int Id_pdv, int Sequencial)
         {
             try
             {
@@ -81,12 +81,13 @@ namespace Database
                     return false;
                 }
 
-                String sql = "insert into arquivo (Nome, Data, Id_pdv) " +
-                             "values (@nome, @data, @Id_pdv)";
+                String sql = "insert into arquivo (Nome, Data, Sequencial, Id_pdv) " +
+                             "values (@nome, @data, @sequencial, @Id_pdv)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, mConn);
                 cmd.Parameters.AddWithValue("@nome", Nome);
                 cmd.Parameters.AddWithValue("@data", Data);
+                cmd.Parameters.AddWithValue("@sequencial", Sequencial);
                 cmd.Parameters.AddWithValue("@Id_pdv", Id_pdv);
 
                 try

@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Verificação Sequencial";
+    List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
+    List<string> lstEstacao = ViewBag.ListaEstacao;
+    List<string> lstCodigo = ViewBag.ListaCodigo;
+    List<Entities.Pdv> lstpdv = ViewBag.ListaPdv;
+}
+<br />
+<h2 class="text-center">
+    Verificação de Sequencial
+</h2>
+
+<br />
+<div class="row g-2 align-items-center">
+    <div class="col-2">
+        <form action="/pdvplus/sequencial/Index" method="get">
+            <select id="estacao" name="estacao" class="form-control" required>
+                <option>Selecione a Estação</option>
+                @foreach (string estacao in lstEstacao)
+                {
+                    <option>@estacao</option>
+                }
+            </select>
+    </div>
+    <div class="col-1">
+        <button class="btn btn-primary" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+            </svg>
+        </button>
+    </div>
+    </form>
+    <div class="col-2">
+        <form action="/pdvplus/sequencial/Index" method="get">
+            <select id="codigo" name="codigo" class="form-control" required>
+                <option>Selecione o Código</option>
+                @foreach (string codigo in lstCodigo)
+                {
+                    <option>@codigo</option>
+                }
+            </select>
+        </div>
+    <div class="col-1">
+        <button class="btn btn-primary" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+            </svg>
+        </button>
+        </form>
+    </div>
+</div>
+<br />
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Estação</th>
+            <th scope="col">Número Pdv</th>
+            <th scope="col">Código</th>
+            <th scope="col">Status</th>
+            <th scope="col">Visualizar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pdv in lstpdv)
+        {
+            <tr>
+                <td>@pdv.Estacao</td>
+                <td>@pdv.Numero</td>
+                <td>@pdv.Codigo</td>
+                <td>@pdv.Status</td>
+                <td>
+                    <button class="btn-sm btn-primary">
+                        <a class="btn btn-sm" href="/pdvplus/sequencial/listar?codigo=@pdv.Codigo">
+                            Detalhes
+                        </a>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

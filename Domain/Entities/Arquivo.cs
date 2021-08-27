@@ -17,14 +17,14 @@ namespace Entities
         public string Nome { get; set; }
         public DateTime Data { get; set; }
         public int Id_pdv { get; set; }
-        public int Sequencial { get; set; }
+        public int Sequencial { get; set; } 
 
         public void SaveFromDirectory()      // Vai às pastas e grava a InfoFile em banco
         {
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
             BancoDeDados.OpenConnection();
 
-            string root = @"\\10.144.63.24\Imp\Empresa1\Garagem";
+            string root = @"\\127.0.0.1\Imp\Empresa1\Garagem";
             string dirYear = DateTime.Now.ToString("yyyy");
             string dirMonth = DateTime.Now.ToString("MM");
             string dirMonth1before = DateTime.Now.AddMonths(-1).ToString("MM");
@@ -54,6 +54,7 @@ namespace Entities
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Sequencial = Convert.ToInt32(item.Name.Substring(39, 6));
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
@@ -61,7 +62,7 @@ namespace Entities
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv, arquivo.Sequencial);
                 }
             }
 
@@ -71,6 +72,7 @@ namespace Entities
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Sequencial = Convert.ToInt32(item.Name.Substring(39, 6));
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
@@ -78,7 +80,7 @@ namespace Entities
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv, arquivo.Sequencial);
                 }
             }
 
@@ -87,6 +89,7 @@ namespace Entities
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Sequencial = Convert.ToInt32(item.Name.Substring(39, 6));
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
@@ -94,7 +97,7 @@ namespace Entities
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv, arquivo.Sequencial);
                 }
             }
 
@@ -103,6 +106,7 @@ namespace Entities
                 arquivo.Nome = item.Name;
                 string dataHoraArquivo = item.Name.Substring(62, 6) + " " + item.Name.Substring(71, 6);
                 arquivo.Data = DateTime.ParseExact(dataHoraArquivo, "yyMMdd HHmmss", CultureInfo.InvariantCulture);
+                arquivo.Sequencial = Convert.ToInt32(item.Name.Substring(39, 6));
                 arquivo.Codigo = (Convert.ToInt32(item.Name.Substring(27, 8))).ToString();
                 arquivo.Estacao = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Estacao).FirstOrDefault();
                 arquivo.Id_pdv = lstPdv.Where(x => x.Codigo.Equals(arquivo.Codigo)).Select(x => x.Id).FirstOrDefault();
@@ -110,7 +114,7 @@ namespace Entities
 
                 if (!lstNomeArquivo.Contains(arquivo.Nome))
                 {
-                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv);
+                    BancoDeDados.Save(arquivo.Nome, arquivo.Data, arquivo.Id_pdv, arquivo.Sequencial);
                 }
             }
         }
@@ -121,13 +125,14 @@ namespace Entities
             BancoDeDados.OpenConnection();
             DataTable dtGetAll = BancoDeDados.GetAll();
 
-            //TODO - Pode ser um DTO
+            //DTO
             List<Arquivo> lstArquivo = dtGetAll.AsEnumerable().
             Select(x => new Arquivo
             {
                 Id = x.Field<int>("Id"),
                 Nome = x.Field<string>("Nome"),
                 Data = x.Field<DateTime>("Data"), 
+                Sequencial = x.Field<int>("Sequencial"),
                 Codigo = x.Field<string>("Codigo"),
                 Numero = x.Field<string>("Numero"),
                 Estacao = x.Field<string>("Estacao"),
@@ -148,6 +153,7 @@ namespace Entities
                 Id = x.Field<int>("Id"), 
                 Nome = x.Field<string>("Nome"),
                 Data = x.Field<DateTime>("Data"),
+                Sequencial = x.Field<int>("Sequencial"),
                 Codigo = x.Field<string>("Codigo"),
                 Numero = x.Field<string>("Numero"),
                 Estacao = x.Field<string>("Estacao"),
@@ -175,6 +181,7 @@ namespace Entities
                     Id = x.Field<int>("Id"),
                     Nome = x.Field<string>("Nome"),
                     Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
                     Codigo = x.Field<string>("Codigo"),
                     Numero = x.Field<string>("Numero"),
                     Estacao = x.Field<string>("Estacao"),
@@ -186,6 +193,61 @@ namespace Entities
 
             return filterLastComunication;
         }
+
+        public List<Arquivo> GetFirstComunicationByFilter(string estacao)
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetAll().AsEnumerable().
+                Where(x => x.Field<string>("Estacao") == estacao).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+            var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
+                    .SelectMany(g => g.OrderByDescending(d => d.Data).Take(1)).ToList();
+
+            return filterLastComunication;
+        }
+
+        public List<Arquivo> ArquivosByCode(string codigo)
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetAll().AsEnumerable().
+                Where(x => x.Field<string>("Codigo") == codigo).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+            var filterCodeByEstacao = lstArquivos.GroupBy(d => d.Id_pdv)
+                    .SelectMany(g => g.OrderByDescending(d => d.Data).Reverse()).ToList();
+
+            return filterCodeByEstacao;
+        }
+
     }
 }
 
