@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Verificação Sequencial";
     List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
     List<string> lstEstacao = ViewBag.ListaEstacao;
@@ -13,42 +12,39 @@
 
 <br />
 <div class="row g-2 align-items-center">
-    <div class="col-2">
-        <form action="/pdvplus/sequencial/Index" method="get">
+    <form action="/pdvplus/sequencial/Analisar" method="get">
+        <div class="col-2">
             <select id="estacao" name="estacao" class="form-control" required>
-                <option>Selecione a Estação</option>
+                <option value=null>Selecione a Estação</option>
                 @foreach (string estacao in lstEstacao)
                 {
                     <option>@estacao</option>
                 }
             </select>
-    </div>
-    <div class="col-1">
-        <button class="btn btn-primary" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
-                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-            </svg>
-        </button>
-    </div>
-    </form>
-    <div class="col-2">
-        <form action="/pdvplus/sequencial/Index" method="get">
+        </div>
+        <div class="col-2">
             <select id="codigo" name="codigo" class="form-control" required>
-                <option>Selecione o Código</option>
+                <option value=null>Selecione o Código</option>
                 @foreach (string codigo in lstCodigo)
                 {
                     <option>@codigo</option>
                 }
             </select>
         </div>
-    <div class="col-1">
-        <button class="btn btn-primary" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
-                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-            </svg>
-        </button>
-        </form>
-    </div>
+        <div class="col-2">
+            <input class="form-control" name="dataInicio" type="date" required />
+        </div>
+        <div class="col-2">
+            <input class="form-control" name="dataFim" type="date" required />
+        </div>
+        <div class="col-1">
+            <button class="btn btn-primary" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                </svg>
+            </button>
+        </div>
+    </form>
 </div>
 <br />
 <br />

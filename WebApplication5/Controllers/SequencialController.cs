@@ -31,7 +31,6 @@ namespace SistemaCadastroLeitura.Controllers
 
             else if(estacao != null && codigo == null)
             {
-                lstArquivo = arquivo.GetAll();
                 ViewBag.ListaEstacao = new Pdv().GetAll().Select(x => x.Estacao).Distinct().ToList();
                 ViewBag.ListaCodigo = new Pdv().GetAll().Where(x => x.Estacao == estacao).Select(y => y.Codigo).Distinct().ToList();
                 ViewBag.ListaArquivo = lstArquivo;
@@ -46,12 +45,12 @@ namespace SistemaCadastroLeitura.Controllers
         }
 
         [HttpGet]
-        public ActionResult Listar(string codigo)
+        public ActionResult Analisar(string estacao, string codigo, DateTime dataInicio, DateTime dataFim)
         {
             Arquivo arq = new Arquivo();
             List<Arquivo> lstArquivo = new List<Arquivo>();
 
-            lstArquivo = arq.GetAll().Where(x => x.Codigo == codigo).ToList();
+            lstArquivo = arq.ArquivosByCode(estacao, codigo, dataInicio, dataFim);
             ViewBag.ListaArquivo = lstArquivo;
 
             return View();

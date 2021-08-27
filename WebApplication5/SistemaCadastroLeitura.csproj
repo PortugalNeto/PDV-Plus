@@ -269,7 +269,7 @@
     <Content Include="Views\Arquivo\Index.cshtml" />
     <Content Include="Views\Sequencial\Teste.cshtml" />
     <Content Include="Views\Sequencial\Index.cshtml" />
-    <Content Include="Views\Sequencial\Listar.cshtml" />
+    <Content Include="Views\Sequencial\Analisar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

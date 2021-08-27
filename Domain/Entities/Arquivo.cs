@@ -142,7 +142,7 @@ namespace Entities
             return lstArquivo;
         }
 
-        public List<Arquivo> GetLastComunication()
+        public List<Arquivo> GetLastComunicationAll()
         {
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
             BancoDeDados.OpenConnection();
@@ -167,15 +167,15 @@ namespace Entities
             return filterLastComunication;
         }
 
-        public List<Arquivo> GetLastComunicationByFilter(string estacao)
+        public List<Arquivo> GetLastComunicationByCodigoAndPeriod(string codigo, DateTime dataInicio, DateTime dataFim)
         {
             List<Arquivo> lstArquivo = new List<Arquivo>();
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
             BancoDeDados.OpenConnection();
 
             //TODO - Fazer um filtro por estação 
-            List<Arquivo> lstArquivos = BancoDeDados.GetAll().AsEnumerable().
-                Where(x => x.Field<string>("Estacao") == estacao).
+            List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
+                Where(x => x.Field<string>("Codigo") == codigo).
                 Select(x => new Arquivo
                 {
                     Id = x.Field<int>("Id"),
@@ -188,40 +188,13 @@ namespace Entities
                     Status = x.Field<string>("Status"),
                 }).ToList();
 
-            var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
-                    .SelectMany(g => g.OrderByDescending(d => d.Data).Take(1)).ToList();
+            var filterLastComunication = lstArquivos.OrderByDescending(x => x.Data).Take(1).ToList();
+                    
 
             return filterLastComunication;
         }
 
-        public List<Arquivo> GetFirstComunicationByFilter(string estacao)
-        {
-            List<Arquivo> lstArquivo = new List<Arquivo>();
-            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
-            BancoDeDados.OpenConnection();
-
-            //TODO - Fazer um filtro por estação 
-            List<Arquivo> lstArquivos = BancoDeDados.GetAll().AsEnumerable().
-                Where(x => x.Field<string>("Estacao") == estacao).
-                Select(x => new Arquivo
-                {
-                    Id = x.Field<int>("Id"),
-                    Nome = x.Field<string>("Nome"),
-                    Data = x.Field<DateTime>("Data"),
-                    Sequencial = x.Field<int>("Sequencial"),
-                    Codigo = x.Field<string>("Codigo"),
-                    Numero = x.Field<string>("Numero"),
-                    Estacao = x.Field<string>("Estacao"),
-                    Status = x.Field<string>("Status"),
-                }).ToList();
-
-            var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
-                    .SelectMany(g => g.OrderByDescending(d => d.Data).Take(1)).ToList();
-
-            return filterLastComunication;
-        }
-
-        public List<Arquivo> ArquivosByCode(string codigo)
+        public List<Arquivo> GetLastComunicationByCodigo(string codigo)
         {
             List<Arquivo> lstArquivo = new List<Arquivo>();
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
@@ -242,10 +215,128 @@ namespace Entities
                     Status = x.Field<string>("Status"),
                 }).ToList();
 
+            var filterLastComunication = lstArquivos.OrderByDescending(x => x.Data).Take(1).ToList();
+
+
+            return filterLastComunication;
+        }
+
+        public List<Arquivo> GetLastComunicationByEstacao(string estacao, DateTime dataInicio, DateTime dataFim) 
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
+                Where(x => x.Field<string>("Estacao") == estacao).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+            var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
+                    .SelectMany(g => g.OrderByDescending(d => d.Data).Take(1)).ToList();
+
+            return filterLastComunication;
+        }
+
+        public List<Arquivo> GetFirstComunicationByEstacao(string estacao, DateTime dataInicio, DateTime dataFim)
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
+                Where(x => x.Field<string>("Estacao") == estacao).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+            var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
+                    .SelectMany(g => g.OrderByDescending(d => d.Data).Reverse().Take(1)).ToList();
+
+            return filterLastComunication;
+        }
+
+        public List<Arquivo> GetFirstComunicationByCode(string codigo, DateTime dataInicio, DateTime dataFim)
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
+                Where(x => x.Field<string>("Codigo") == codigo).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+            var filterLastComunication = lstArquivos.OrderBy(x => x.Data).Take(1).ToList();
+
+
+            return filterLastComunication;
+        }
+
+        public List<Arquivo> ArquivosByCode(string estacao, string codigo, DateTime dataInicio, DateTime dataFim)
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
+                Where(x => x.Field<string>("Codigo") == codigo).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
             var filterCodeByEstacao = lstArquivos.GroupBy(d => d.Id_pdv)
                     .SelectMany(g => g.OrderByDescending(d => d.Data).Reverse()).ToList();
 
             return filterCodeByEstacao;
+        }
+
+        public Arquivo RequestSequencialArquivoDTO(string estacao, string codigo)
+        {
+            Arquivo arquivo = new Arquivo();
+
+            arquivo.Estacao = estacao;
+            arquivo.Codigo = codigo;
+
+            return arquivo;
         }
 
     }

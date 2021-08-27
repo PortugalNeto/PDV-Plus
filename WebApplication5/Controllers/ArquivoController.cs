@@ -23,11 +23,11 @@ namespace WebApplication5.Controllers
 
             if (!string.IsNullOrEmpty(estacao))
             {
-                lstArquivo = arquivo.GetLastComunicationByFilter(estacao);
+                lstArquivo = arquivo.GetLastComunicationByCodigo(estacao);
             }
             else
             {
-                lstArquivo = arquivo.GetLastComunication();
+                lstArquivo = arquivo.GetLastComunicationAll();
             }
 
             ViewBag.ListaArquivo = lstArquivo;

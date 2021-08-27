@@ -147,5 +147,47 @@ namespace Database
             }
         }
 
+        public DataTable GetByPeriodo(DateTime dataInicio, DateTime dataFim)
+        {
+            try
+            {
+                try
+                {
+                    if (mConn.State != ConnectionState.Open)
+                    {
+                        mConn.Open();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //ToolsBLL.gerarLog(e, "Problema de Conexão ao banco. ConnectionBD.cs");
+                    return null;
+                }
+
+                String sql = @"select * from arquivo a
+                               inner join pdv p
+                               on a.Id_pdv = p.Id 
+                               where a.data >= @dataInicio and a.data <= @dataFim";
+                DataTable dtArq = new DataTable();
+                MySqlDataAdapter daArq = new MySqlDataAdapter();
+
+                daArq = new MySqlDataAdapter(sql, mConn);
+                daArq.SelectCommand.Parameters.AddWithValue("@dataInicio", dataInicio);
+                daArq.SelectCommand.Parameters.AddWithValue("@dataFim", dataFim);
+
+                daArq.Fill(dtArq);
+
+                CloseConnection();
+
+                return dtArq;
+
+            }
+            catch (Exception e)
+            {
+                //ToolsBLL.gerarLog(e, "Problema ao autenticar. ConnectionBD.cs");
+                return null;
+            }
+        }
+
     }
 }
