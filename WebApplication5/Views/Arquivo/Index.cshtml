@@ -4,69 +4,72 @@
     List<string> lstEstacao = ViewBag.ListaEstacao;
 }
 <div>
-    <br />
+    <br/>
 </div>
 
 <div>
     <form action="/pdvplus/arquivo/salvar" method="post">
-        <button style="opacity : 0.75; text-emphasis-color: black;" class="btn btn-warning"  type="submit" id="salvabtn">Forçar comunicação manual</button>
-    </form> 
+        <button style="opacity : 0.75; text-emphasis-color: black;" class="btn btn-warning" type="submit" id="salvabtn">Forçar comunicação manual</button>
+    </form>
 </div>
-<br />
+<br/>
 <h4 class="text-center">Página atualizada automaticamente duas vezes por dia</h4>
 <h4 class="text-center">FAVOR deixar esta ABA ABERTA</h4>
-<h5>Filtro por Estação</h5>
-<form action="/pdvplus/arquivo/Index" method="get">
-    <div class="form">
-        <select name="estacao" class="form-control">
-            <option></option>
-            @foreach (string estacao in lstEstacao)
-            {
-                <option>@estacao</option>
-            }
-        </select>
-        <br />
-        <button type="submit" class="btn btn-primary">Filtrar</button>
-    </div>
-</form>
-<hr />
+<hr/>
 <h3 class="text-center">Arquivos Comunicados</h3>
-<br />
+<br/>
 <div style="padding-left: 85%">
     <button class="btn btn-success" id="btnExport">
         Exportar planilha
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
-            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
         </svg>
     </button>
 </div>
-<br />
+<h5>Filtrar por Estação</h5>
+<form action="/pdvplus/arquivo/Index" method="get">
+    <div class="row g-2 align-items-center">
+        <div class="col-3">
+            <select name="estacao" class="form-control">
+                <option></option>
+                @foreach (string estacao in lstEstacao)
+                {
+                    <option>@estacao</option>
+                }
+            </select>
+        </div>
+        <div class="col-1">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </div>
+</form>
+<br/>
 <div>
-    <br />
+    <br/>
 </div>
 <div id="listaArquivos">
     <table class="table">
         <thead class="thead-dark">
-            <tr>
+        <tr>
 
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Estação / N° Sr</th>
-                <th scope="col">Data</th>
-                <th scope="col">Status PDV</th>
-            </tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Estação / N° Sr</th>
+            <th scope="col">Data</th>
+            <th scope="col">Status PDV</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var arquivo in lstArquivos)
-            {
-                <tr>
-                    <td scope="row">@arquivo.Id</td>
-                    <td scope="row">@arquivo.Nome</td>
-                    <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
-                    <td scope="row">@arquivo.Data</td>
-                    <td scope="row">@arquivo.Status</td>
-                </tr>
-            }
+        @foreach (var arquivo in lstArquivos)
+        {
+            <tr>
+                <td scope="row">@arquivo.Id</td>
+                <td scope="row">@arquivo.Nome</td>
+                <td scope="row">@arquivo.Estacao@arquivo.Numero</td>
+                <td scope="row">@arquivo.Data</td>
+                <td scope="row">@arquivo.Status</td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>
