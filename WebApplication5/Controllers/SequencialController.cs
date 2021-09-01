@@ -36,6 +36,7 @@ namespace SistemaCadastroLeitura.Controllers
                 ViewBag.ListaNumero = new List<string>();
                 ViewBag.ListaArquivo = lstArquivo;
                 ViewBag.ListaPdv = lstpdv;
+                
                 return Json(lstnumero, JsonRequestBehavior.AllowGet);
             }
 

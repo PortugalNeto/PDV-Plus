@@ -12,11 +12,11 @@
 <hr>
 <br />
 <div style="margin-left: 5%;">
-    <form action="/pdvplus/sequencial/Analisar" method="get">
+    <form action="/pdvplus/sequencial/index" method="get">
         <div class="row g-2 align-items-center">
             <div class="col-2">
                 <select id="estacao" name="estacao" class="form-control" required>
-                    <option value=null>Estação</option>
+                    <option value=null>Selecione a Estação</option>
                     @foreach (string estacao in lstEstacao)
                     {
                         <option value="@estacao">@estacao</option>
@@ -105,7 +105,7 @@
             for (item in teste) {
                 option = new Option(teste[item], '#numero');
             }
-            
+
         });
     });
 
