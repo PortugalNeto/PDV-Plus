@@ -29,7 +29,7 @@ namespace SistemaCadastroLeitura.Controllers
                 return View();
             }
 
-            else if(estacao != null && numero == null)
+            else
             {
                 ViewBag.ListaEstacao = new Pdv().GetAll().Select(x => x.Estacao).Distinct().ToList();
  
@@ -41,26 +41,33 @@ namespace SistemaCadastroLeitura.Controllers
                 
                 return Json(lstNumeros, JsonRequestBehavior.AllowGet);
             }
-
-            else
-            {
-                return Redirect("/pdvplus/sequencial/listar?numero=" + numero);
-            }
         }
 
         
         
 
         [HttpGet]
-        public ActionResult Analisar(string estacao, string codigo, DateTime dataInicio, DateTime dataFim)
+        public ActionResult Analisar(string estacao, string numero, DateTime dataInicio, DateTime dataFim)
         {
+            Pdv pdv = new Pdv();
+            var estePdv = pdv.GetByEstacaoENumero(estacao, numero);
             Arquivo arq = new Arquivo();
             List<Arquivo> lstArquivo = new List<Arquivo>();
 
-            lstArquivo = arq.ArquivosByCode(estacao, codigo, dataInicio, dataFim);
-            ViewBag.ListaArquivo = lstArquivo;
+            lstArquivo = arq.ArquivosPeriodoByEstacaoENumero(estacao, numero, dataInicio, dataFim);
 
-            return View();
+            if (lstArquivo.Count() == 0)
+            {
+                ViewBag.Mensagem = "Este PDV não possui arquivos registrados em banco no período selecionado.";
+                return View();
+            }
+
+            else
+            {
+                ViewBag.ListaArquivo = lstArquivo;
+                return View();
+            }
+
         }
 	}
 }

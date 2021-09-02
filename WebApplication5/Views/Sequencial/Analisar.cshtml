@@ -3,31 +3,52 @@
 @{
     ViewBag.Title = "Análise do PDV";
     List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
+    string msg = ViewBag.Mensagem;
 }
-<br />
-<h2 class="text-center">Detalhes do PDV</h2>
-<br />
-<h5 class="text-center">Quantidade de Arquivos : @lstArquivos.Count() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Inicial: @lstArquivos.Select(x => x.Sequencial).Min() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Final: @lstArquivos.Select(x => x.Sequencial).Max()</h5>
-<br />
-<br />
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Código</th>
-            <th scope="col">Estação</th>
-            <th scope="col">Número Pdv</th>
-            <th scope="col">Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var arq in lstArquivos)
-        {
+@if (msg != null)
+{
+    <br />
+    <br />
+    <br />
+    <h4 class="text-center">@msg</h4>
+    <hr />
+    <button class="btn btn-primary">
+        <a href="/pdvplus/sequencial/index">Retornar</a>
+    </button>
+    <br />
+    <br />
+    <br />
+}
+else
+{
+
+    <br />
+    <h2 class="text-center">Detalhes do PDV</h2>
+    <br />
+    <h5 class="text-center">Quantidade de Arquivos : @lstArquivos.Count() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Inicial: @lstArquivos.Select(x => x.Sequencial).Min() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Final: @lstArquivos.Select(x => x.Sequencial).Max()</h5>
+    <br />
+    <br />
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <th scope="row">@arq.Codigo</th>
-                <td>@arq.Estacao</td>
-                <td>@arq.Numero</td>
-                <td>@arq.Status</td>
+                <th scope="col">Código</th>
+                <th scope="col">Estação</th>
+                <th scope="col">Número Pdv</th>
+                <th scope="col">Sequencial</th>
+                <th scope="col">Status</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var arq in lstArquivos)
+            {
+                <tr>
+                    <th scope="row">@arq.Codigo</th>
+                    <td>@arq.Estacao</td>
+                    <td>@arq.Numero</td>
+                    <td>@arq.Sequencial</td>
+                    <td>@arq.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

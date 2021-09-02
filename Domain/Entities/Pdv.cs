@@ -105,6 +105,12 @@ namespace Entities
             return BancoDeDados.GetByCode(this.Codigo);
         }
 
+        public Pdv GetByEstacaoENumero(string estacao, string numero)
+        {
+            Pdv pdv = new Pdv();
+            var retorno = pdv.GetAll().Where(x => x.Estacao == estacao).Where(y => y.Numero == numero).FirstOrDefault();
+            return retorno;
+        }
     }
 }
 

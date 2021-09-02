@@ -329,6 +329,33 @@ namespace Entities
             return filterCodeByEstacao;
         }
 
+        public List<Arquivo> ArquivosPeriodoByEstacaoENumero(string estacao, string numero, DateTime dataInicio, DateTime dataFim)
+        {
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
+                Where(x => x.Field<string>("Estacao") == estacao).Where(y => y.Field<string>("Numero") == numero).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+            var filterPeriodoEstacaoENumero = lstArquivos.GroupBy(d => d.Id_pdv)
+                    .SelectMany(g => g.OrderBy(d => d.Data)).ToList();
+
+            return filterPeriodoEstacaoENumero;
+        }
+
         public Arquivo RequestSequencialArquivoDTO(string estacao, string codigo)
         {
             Arquivo arquivo = new Arquivo();
