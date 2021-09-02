@@ -32,12 +32,14 @@ namespace SistemaCadastroLeitura.Controllers
             else if(estacao != null && numero == null)
             {
                 ViewBag.ListaEstacao = new Pdv().GetAll().Select(x => x.Estacao).Distinct().ToList();
-                var lstnumero = new Pdv().GetAll().Where(x => x.Estacao == estacao).Select(y => y.Numero).ToList();
-                ViewBag.ListaNumero = new List<string>();
-                ViewBag.ListaArquivo = lstArquivo;
+ 
+                var lstNumeros = new Pdv().GetAll().Where(x => x.Estacao == estacao).Select(y => y.Numero).ToList().OrderBy(x => x);
+                
+                //ViewBag.ListaNumero = new List<string>();
+                //ViewBag.ListaArquivo = lstArquivo;
                 ViewBag.ListaPdv = lstpdv;
                 
-                return Json(lstnumero, JsonRequestBehavior.AllowGet);
+                return Json(lstNumeros, JsonRequestBehavior.AllowGet);
             }
 
             else

@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "Verificação Sequencial";
-    List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
+    //List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
     List<string> lstEstacao = ViewBag.ListaEstacao;
-    List<string> lstnumero = ViewBag.ListaNumero;
+    //List<string> lstnumero = ViewBag.ListaNumero;
     List<Entities.Pdv> lstpdv = ViewBag.ListaPdv;
 }
 <br />
@@ -26,10 +26,6 @@
             <div class="col-2">
                 <select id="numero" name="numero" class="form-control" required>
                     <option value=null>Número</option>
-                    @foreach (string numero in lstnumero)
-                    {
-                        <option value="@numero">@numero</option>
-                    }
                 </select>
             </div>
             <div class="col-3">
@@ -94,16 +90,15 @@
             type: "POST",
             data: { estacao: $('#estacao :checked').val() },
             dataType: "html"
-
         });
 
-
-
         request.done(function (data) {
-            var teste = data;
-            const numero = document.getElementById("numero");
-            for (item in teste) {
-                option = new Option(teste[item], '#numero');
+            var data = JSON.parse(data);
+            $('#numero').find('option:not(:first)').remove();
+
+            for (var i = 0; i < data.length; i++) {
+                var select = document.getElementById("numero");
+                select.options[select.options.length] = new Option(data[i], data[i]);
             }
 
         });
