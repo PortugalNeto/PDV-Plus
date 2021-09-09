@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Atenção";
+    List<Entities.Pdv> lstpulo = ViewBag.ListaPulos;
+}
+
+<h2 class="text-center">Lista de PDVs em que podem haver pulos:</h2>
+<br />
+<table class="table">
+    <thead class="thead-">
+        <tr>
+            <th scope="col">Estação</th>
+            <th scope="col">Número Pdv</th>
+            <th scope="col">Código</th>
+            <th scope="col">Status</th>
+            <th scope="col">Visualizar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pdv in lstpulo)
+        {
+            <tr>
+                <td>@pdv.Estacao</td>
+                <td>@pdv.Numero</td>
+                <td>@pdv.Codigo</td>
+                <td>@pdv.Status</td>
+                <td>
+                    <a class="btn btn-sm" href="/pdvplus/sequencial/analisar?codigo=@pdv.Codigo" style="color: #2a7aaf; font-size: medium;">
+                        <i>
+                            <u>Detalhes</u>
+                        </i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

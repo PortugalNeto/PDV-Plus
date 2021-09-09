@@ -43,9 +43,6 @@ namespace SistemaCadastroLeitura.Controllers
             }
         }
 
-        
-        
-
         [HttpGet]
         public ActionResult Analisar(string estacao, string numero, DateTime dataInicio, DateTime dataFim)
         {
@@ -53,6 +50,7 @@ namespace SistemaCadastroLeitura.Controllers
             var estePdv = pdv.GetByEstacaoENumero(estacao, numero);
             Arquivo arq = new Arquivo();
             List<Arquivo> lstArquivo = new List<Arquivo>();
+
 
             lstArquivo = arq.ArquivosPeriodoByEstacaoENumero(estacao, numero, dataInicio, dataFim);
 
@@ -68,6 +66,27 @@ namespace SistemaCadastroLeitura.Controllers
                 return View();
             }
 
+        }
+        
+        [HttpGet]
+        public ActionResult Atencao()
+        {
+            Pdv pdv = new Pdv();
+            List<Pdv> lstpdv = new List<Pdv>();
+            lstpdv = pdv.GetAll();
+            List<Pdv> lstPulo = new List<Pdv>();
+            foreach (var item in lstpdv)
+            {
+                if (item.HasArquivo(item.Codigo))
+                {
+                if (item.VerificaPulo(item.Codigo))
+                    lstPulo.Add((Pdv)item);
+                }
+            }
+
+            ViewBag.ListaPulos = lstPulo;
+
+            return View();
         }
 	}
 }

@@ -194,9 +194,9 @@ namespace Entities
             return filterLastComunication;
         }
 
-        public List<Arquivo> GetLastComunicationByCodigo(string codigo)
+        public List<Arquivo> GetLastComunicationByEstacao(string codigo)
         {
-            List<Arquivo> lstArquivo = new List<Arquivo>();
+            Arquivo arq = new Arquivo();
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
             BancoDeDados.OpenConnection();
 
@@ -215,10 +215,37 @@ namespace Entities
                     Status = x.Field<string>("Status"),
                 }).ToList();
 
-            var filterLastComunication = lstArquivos.OrderByDescending(x => x.Data).Take(1).ToList();
+            var last = lstArquivos.OrderByDescending(x => x.Data).Take(1).ToList();
 
 
-            return filterLastComunication;
+            return last;
+        }
+        
+        public Arquivo GetLastComunicationByCodigo(string codigo)
+        {
+            Arquivo arq = new Arquivo();
+            ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
+            BancoDeDados.OpenConnection();
+
+            //TODO - Fazer um filtro por estação 
+            List<Arquivo> lstArquivos = BancoDeDados.GetAll().AsEnumerable().
+                Where(x => x.Field<string>("Codigo") == codigo).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+            var last = lstArquivos.OrderByDescending(x => x.Data).FirstOrDefault();
+
+
+            return last;
         }
 
         public List<Arquivo> GetLastComunicationByEstacao(string estacao, DateTime dataInicio, DateTime dataFim) 
@@ -227,7 +254,25 @@ namespace Entities
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
             BancoDeDados.OpenConnection();
 
-            //TODO - Fazer um filtro por estação 
+            if (dataInicio == null || dataFim == null)
+            {
+                lstArquivo = BancoDeDados.GetAll().AsEnumerable().
+                Where(x => x.Field<string>("Estacao") == estacao).
+                Select(x => new Arquivo
+                {
+                    Id = x.Field<int>("Id"),
+                    Nome = x.Field<string>("Nome"),
+                    Data = x.Field<DateTime>("Data"),
+                    Sequencial = x.Field<int>("Sequencial"),
+                    Codigo = x.Field<string>("Codigo"),
+                    Numero = x.Field<string>("Numero"),
+                    Estacao = x.Field<string>("Estacao"),
+                    Status = x.Field<string>("Status"),
+                }).ToList();
+
+                var last = lstArquivo.OrderByDescending(x => x.Data).Take(1).ToList();
+                return last;
+            }
             List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
                 Where(x => x.Field<string>("Estacao") == estacao).
                 Select(x => new Arquivo
@@ -270,19 +315,19 @@ namespace Entities
                 }).ToList();
 
             var filterLastComunication = lstArquivos.GroupBy(d => d.Codigo)
-                    .SelectMany(g => g.OrderByDescending(d => d.Data).Reverse().Take(1)).ToList();
+                    .SelectMany(g => g.OrderBy(d => d.Data).Take(1)).ToList();
 
             return filterLastComunication;
         }
 
-        public List<Arquivo> GetFirstComunicationByCode(string codigo, DateTime dataInicio, DateTime dataFim)
+        public Arquivo GetFirstComunicationByCode(string codigo)
         {
             List<Arquivo> lstArquivo = new List<Arquivo>();
             ArquivoDataAccess BancoDeDados = new ArquivoDataAccess();
             BancoDeDados.OpenConnection();
 
             //TODO - Fazer um filtro por estação 
-            List<Arquivo> lstArquivos = BancoDeDados.GetByPeriodo(dataInicio, dataFim).AsEnumerable().
+            List<Arquivo> lstArquivos = BancoDeDados.GetAll().AsEnumerable().
                 Where(x => x.Field<string>("Codigo") == codigo).
                 Select(x => new Arquivo
                 {
@@ -296,10 +341,10 @@ namespace Entities
                     Status = x.Field<string>("Status"),
                 }).ToList();
 
-            var filterLastComunication = lstArquivos.OrderBy(x => x.Data).Take(1).ToList();
+            var first = lstArquivos.OrderBy(x => x.Data).FirstOrDefault();
 
 
-            return filterLastComunication;
+            return first;
         }
 
         public List<Arquivo> ArquivosByCode(string estacao, string codigo, DateTime dataInicio, DateTime dataFim)
@@ -324,7 +369,7 @@ namespace Entities
                 }).ToList();
 
             var filterCodeByEstacao = lstArquivos.GroupBy(d => d.Id_pdv)
-                    .SelectMany(g => g.OrderByDescending(d => d.Data).Reverse()).ToList();
+                    .SelectMany(g => g.OrderBy(d => d.Data)).ToList();
 
             return filterCodeByEstacao;
         }

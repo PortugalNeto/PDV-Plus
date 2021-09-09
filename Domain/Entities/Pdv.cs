@@ -111,6 +111,39 @@ namespace Entities
             var retorno = pdv.GetAll().Where(x => x.Estacao == estacao).Where(y => y.Numero == numero).FirstOrDefault();
             return retorno;
         }
+
+        public bool VerificaPulo(string codigo)
+        {
+            Arquivo arq = new Arquivo();
+           
+            if (arq.GetLastComunicationByCodigo(codigo).Sequencial 
+                    - arq.GetFirstComunicationByCode(codigo).Sequencial ==
+                    (arq.GetAll().Where(x => x.Codigo == codigo).Count() - 1))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        public bool HasArquivo(string codigo)
+        {
+            Arquivo arq = new Arquivo();
+            var condicao = arq.GetLastComunicationByCodigo(codigo);
+
+            if (condicao != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
 

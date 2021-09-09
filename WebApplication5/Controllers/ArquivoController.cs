@@ -23,7 +23,7 @@ namespace WebApplication5.Controllers
 
             if (!string.IsNullOrEmpty(estacao))
             {
-                lstArquivo = arquivo.GetLastComunicationByCodigo(estacao);
+                lstArquivo = arquivo.GetLastComunicationByEstacao(estacao);
             }
             else
             {

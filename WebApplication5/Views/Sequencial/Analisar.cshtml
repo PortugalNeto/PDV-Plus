@@ -12,9 +12,11 @@
     <br />
     <h4 class="text-center">@msg</h4>
     <hr />
+    <form action="/pdvplus/sequencial/index" method="get">
     <button class="btn btn-primary">
-        <a href="/pdvplus/sequencial/index">Retornar</a>
+        Retornar
     </button>
+    </form>
     <br />
     <br />
     <br />
@@ -25,7 +27,7 @@ else
     <br />
     <h2 class="text-center">Detalhes do PDV</h2>
     <br />
-    <h5 class="text-center">Quantidade de Arquivos : @lstArquivos.Count() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Inicial: @lstArquivos.Select(x => x.Sequencial).Min() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Final: @lstArquivos.Select(x => x.Sequencial).Max()</h5>
+    <h5 class="text-center">Número de Arquivos : @lstArquivos.Count() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Inicial: @lstArquivos.Select(x => x.Sequencial).Min() &nbsp;&nbsp;&nbsp;&nbsp; Sequencial Final: @lstArquivos.Select(x => x.Sequencial).Max()</h5>
     <br />
     <br />
     <table class="table">

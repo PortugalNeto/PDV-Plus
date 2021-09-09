@@ -1,9 +1,8 @@
 ﻿@{
     ViewBag.Title = "Verificação Sequencial";
-    //List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
     List<string> lstEstacao = ViewBag.ListaEstacao;
-    //List<string> lstnumero = ViewBag.ListaNumero;
     List<Entities.Pdv> lstpdv = ViewBag.ListaPdv;
+    List<Entities.Pdv> lstpulo = ViewBag.ListaPulos;
 }
 <br />
 <h3 class="text-center">
@@ -11,6 +10,17 @@
 </h3>
 <hr />
 <br />
+<div style="padding-left: 38%;">
+    <div class="card text-white bg-warning mb-3 text-center" style="max-width: 18rem;">
+        <div class="card-header">ATENÇÃO</div>
+        <div class="card-body">
+            <h5 class="card-title">PDVs com possíveis pulos</h5>
+            <p class="card-text text-white"><a style="color: darkblue;" href="/pdvplus/sequencial/atencao">Clique AQUI</a> para ver a lista de possíveis pulos ou formatação.</p>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
 <div style="margin-left: 5%;">
     <form action="/pdvplus/sequencial/analisar" method="get">
         <div class="row g-2 align-items-center">
