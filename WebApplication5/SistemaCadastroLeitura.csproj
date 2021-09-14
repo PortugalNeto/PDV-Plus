@@ -273,6 +273,7 @@
     <Content Include="Views\Sequencial\Index.cshtml" />
     <Content Include="Views\Sequencial\Analisar.cshtml" />
     <Content Include="Views\Sequencial\Atencao.cshtml" />
+    <Content Include="Views\Sequencial\Detalhes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

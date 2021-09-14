@@ -51,12 +51,51 @@ namespace SistemaCadastroLeitura.Controllers
             Arquivo arq = new Arquivo();
             List<Arquivo> lstArquivo = new List<Arquivo>();
 
+            if (dataInicio != null && dataFim != null)
+            {
+                lstArquivo = arq.ArquivosPeriodoByEstacaoENumero(estacao, numero, dataInicio, dataFim);
+                if (lstArquivo.Count() == 0)
+                {
+                    ViewBag.Mensagem = "Este PDV não possui arquivos registrados em banco no período selecionado.";
+                    return View();
+                }
 
-            lstArquivo = arq.ArquivosPeriodoByEstacaoENumero(estacao, numero, dataInicio, dataFim);
+                else
+                {
+                    ViewBag.ListaArquivo = lstArquivo;
+                    return View();
+                }
+            }
+            
+            else
+            {
+                lstArquivo = arq.ArquivosByEstacaoENumero(estacao, numero);
+                if (lstArquivo.Count() == 0)
+                {
+                    ViewBag.Mensagem = "Este PDV ainda não possui arquivos registrados em banco.";
+                    return View();
+                }
 
+                else
+                {
+                    ViewBag.ListaArquivo = lstArquivo;
+                    return View();
+                }
+            }
+
+        }
+
+        public ActionResult Detalhes(string codigo)
+        {
+            Pdv pdv = new Pdv();
+            var estePdv = pdv.GetByCodigo(codigo);
+            Arquivo arq = new Arquivo();
+            List<Arquivo> lstArquivo = new List<Arquivo>();
+
+            lstArquivo = arq.ArquivosByCode(codigo);
             if (lstArquivo.Count() == 0)
             {
-                ViewBag.Mensagem = "Este PDV não possui arquivos registrados em banco no período selecionado.";
+                ViewBag.Mensagem = "Este PDV ainda não possui arquivos registrados em banco.";
                 return View();
             }
 
@@ -65,9 +104,8 @@ namespace SistemaCadastroLeitura.Controllers
                 ViewBag.ListaArquivo = lstArquivo;
                 return View();
             }
-
         }
-        
+
         [HttpGet]
         public ActionResult Atencao()
         {

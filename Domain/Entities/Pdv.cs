@@ -90,6 +90,13 @@ namespace Entities
             }
         }
 
+        public Pdv GetByCodigo(string codigo)
+        {
+            Pdv pdv = new Pdv();
+            pdv.GetAll().Where(x => x.Codigo == codigo);
+            return pdv;
+        }
+
         public void Delete(int id)
         {
             PdvDataAccess BancoDeDados = new PdvDataAccess();
