@@ -22,6 +22,11 @@ namespace Database
             string bdUser = "root";
             string bdPwd = "";
 
+            //string bdServer = "10.144.63.24";
+            //string bdServerDatabase = "sistema_pdv";
+            //string bdUser = "strange";
+            //string bdPwd = "supervia";
+
             sConnectionMysqlString = "Persist Security Info=False;server=" + bdServer + ";database=" + bdServerDatabase + ";uid=" + bdUser + ";pwd=" + bdPwd;
         }
 

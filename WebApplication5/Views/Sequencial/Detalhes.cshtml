@@ -2,6 +2,7 @@
     ViewBag.Title = "Detalhes";
     List<Entities.Arquivo> lstArquivos = ViewBag.ListaArquivo;
     string msg = ViewBag.Mensagem;
+    int totalPulos = new int();
 }
 @if (msg != null)
 {
@@ -53,7 +54,7 @@ else
                         <td>@lstArquivos[i].Estacao</td>
                         <td>@lstArquivos[i].Numero</td>
                         <td>@lstArquivos[i].Sequencial</td>
-                        <td>0</td>
+                        <td>--</td>
                         <td>@lstArquivos[i].Status</td>
                     </tr>
                 }
@@ -67,7 +68,7 @@ else
                             <td>@lstArquivos[i].Estacao</td>
                             <td>@lstArquivos[i].Numero</td>
                             <td>@lstArquivos[i].Sequencial</td>
-                            <td>0</td>
+                            <td>--</td>
                             <td>@lstArquivos[i].Status</td>
                         </tr>
                     }
@@ -76,26 +77,39 @@ else
                     {
                         string formatado = "formatado";
                         int pulo = lstArquivos[i + 1].Sequencial - lstArquivos[i].Sequencial - 1;
-                        if (pulo < 0)
+                        if (pulo == -1)
                         {
-                            <tr class="alert-light">
-                                <th scope="row">@lstArquivos[i].Codigo</th>
-                                <td>@lstArquivos[i].Estacao</td>
-                                <td>@lstArquivos[i].Numero</td>
-                                <td>@lstArquivos[i].Sequencial</td>
-                                <td style="color: black"><b>@formatado</b></td>
-                                <td>@lstArquivos[i].Status</td>
+                            <tr class="alert-warning">
+                                <th scope="row" style="color: black">@lstArquivos[i].Codigo</th>
+                                <td style="color: black">@lstArquivos[i].Estacao</td>
+                                <td style="color: black">@lstArquivos[i].Numero</td>
+                                <td style="color: black">@lstArquivos[i].Sequencial</td>
+                                <td style="color: black">Duplicata</td>
+                                <td style="color: black">@lstArquivos[i].Status</td>
                             </tr>
                         }
+
+                        else if (pulo < 0)
+                        {
+                            <tr class="alert-light">
+                                <th scope="row" style="color: black">@lstArquivos[i].Codigo</th>
+                                <td style="color: black">@lstArquivos[i].Estacao</td>
+                                <td style ="color: black">@lstArquivos[i].Numero</td>
+                                <td style="color: black">@lstArquivos[i].Sequencial</td>
+                                <td style="color: black">@formatado</td>
+                                <td style="color: black">@lstArquivos[i].Status</td>
+                            </tr>
+                        }
+
                         else
                         {
                             <tr class="alert-danger">
-                                <th scope="row">@lstArquivos[i].Codigo</th>
-                                <td>@lstArquivos[i].Estacao</td>
-                                <td>@lstArquivos[i].Numero</td>
-                                <td>@lstArquivos[i].Sequencial</td>
-                                <td style="color: black"><b>@pulo</b></td>
-                                <td>@lstArquivos[i].Status</td>
+                                <th scope="row" style="color: black">@lstArquivos[i].Codigo</th>
+                                <td style="color: black">@lstArquivos[i].Estacao</td>
+                                <td style="color: black">@lstArquivos[i].Numero</td>
+                                <td style="color: black">@lstArquivos[i].Sequencial</td>
+                                <td style="color: black">@pulo</td>
+                                <td style="color: black">@lstArquivos[i].Status</td>
                             </tr>
                         }
 
