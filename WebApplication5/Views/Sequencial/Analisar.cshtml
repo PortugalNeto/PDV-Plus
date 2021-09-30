@@ -36,11 +36,12 @@ else
     <br />
     <table class="table">
         <thead class="thead-dark">
-            <tr>
-                <th scope="col">Código</th>
+            <tr class="text-center">
                 <th scope="col">Estação</th>
                 <th scope="col">Número Pdv</th>
+                <th scope="col">Data</th>
                 <th scope="col">Sequencial</th>
+                <th scope="col">pulo/formatação</th>
                 <th scope="col">Status</th>
             </tr>
         </thead>
@@ -49,39 +50,66 @@ else
             {
                 if (i == lstArquivos.Count() - 1)
                 {
-                    <tr>
-                        <th scope="row">@lstArquivos[i].Codigo</th>
+                    <tr class="text-center">
                         <td>@lstArquivos[i].Estacao</td>
                         <td>@lstArquivos[i].Numero</td>
+                        <td>@lstArquivos[i].Data</td>
                         <td>@lstArquivos[i].Sequencial</td>
+                        <td>--</td>
                         <td>@lstArquivos[i].Status</td>
                     </tr>
                 }
 
                 else
                 {
-                    if (lstArquivos[i].Sequencial == lstArquivos[i + 1].Sequencial - 1)
+                    string formatado = "formatado";
+                    int pulo = lstArquivos[i + 1].Sequencial - lstArquivos[i].Sequencial - 1;
+                    if (pulo == -1)
                     {
-                        <tr>
-                            <th scope="row">@lstArquivos[i].Codigo</th>
-                            <td>@lstArquivos[i].Estacao</td>
-                            <td>@lstArquivos[i].Numero</td>
-                            <td>@lstArquivos[i].Sequencial</td>
-                            <td>@lstArquivos[i].Status</td>
+                        <tr class="alert-warning">
+                            <td class="text-center" style="color: black">@lstArquivos[i].Estacao</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Numero</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Data</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Sequencial</td>
+                            <td class="text-center" style="color: black">Duplicata</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Status</td>
                         </tr>
                     }
 
-                    else
+                    else if (pulo < 0)
+                    {
+                        <tr class="alert-light">
+                            <td class="text-center" style="color: black">@lstArquivos[i].Estacao</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Numero</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Data</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Sequencial</td>
+                            <td class="text-center" style="color: black">@formatado</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Status</td>
+                        </tr>
+                    }
+
+                    else if (pulo > 0)
                     {
                         <tr class="alert-danger">
-                            <th scope="row">@lstArquivos[i].Codigo</th>
-                            <td>@lstArquivos[i].Estacao</td>
-                            <td>@lstArquivos[i].Numero</td>
-                            <td>@lstArquivos[i].Sequencial</td>
-                            <td>@lstArquivos[i].Status</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Estacao</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Numero</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Data</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Sequencial</td>
+                            <td class="text-center" style="color: black">@pulo</td>
+                            <td class="text-center" style="color: black">@lstArquivos[i].Status</td>
                         </tr>
                     }
-
+                    else
+                    {
+                        <tr>
+                            <td class="text-center" >@lstArquivos[i].Estacao</td>
+                            <td class="text-center" >@lstArquivos[i].Numero</td>
+                            <td class="text-center" >@lstArquivos[i].Data</td>
+                            <td class="text-center" >@lstArquivos[i].Sequencial</td>
+                            <td class="text-center" >--</td>
+                            <td class="text-center" >@lstArquivos[i].Status</td>
+                        </tr>
+                    }
                 }
             }
         </tbody>
